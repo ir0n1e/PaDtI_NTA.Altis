@@ -1,4 +1,4 @@
-if (!isServer)  exitWith {};
+if !(isClass(configFile/"CfgPatches"/"BWA3_Common")) exitwith {};
 //null = this execVM "Crate1.sqf";
 private "_crate";
 _crate = _this;

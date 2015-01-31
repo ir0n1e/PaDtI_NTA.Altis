@@ -1,3 +1,4 @@
+if !(isClass(configFile/"CfgPatches"/"BWA3_Common")) exitwith {};
 private "_crate";
 _crate = _this;
 

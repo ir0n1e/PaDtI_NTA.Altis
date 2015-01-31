@@ -1,4 +1,4 @@
-
+if !(isClass(configFile/"CfgPatches"/"AGM_Medical")) exitwith {};
 
 _this spawn {
 	while {true} do {
