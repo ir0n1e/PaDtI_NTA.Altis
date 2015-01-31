@@ -23,7 +23,7 @@ PO3_TOTAL_VEHICLES = [];
 
 _returnPoint = format["return_point_%1",(PO3_side_1 select 0)] call PO3_fnc_getPos;
 _container = "B_supplyCrate_F" createVehicle _returnPoint;
-[_container] call PO3_fnc_setAsLoadable;
+//[_container] call PO3_fnc_setAsLoadable;
 _container setVariable ["PO3_deployable_tower",true,true];
 _container setVariable ["PO3_packedClass",(PO3_target_tower_types call PO3_fnc_getArrayRandom),true];
 _container setVariable ["PO3_isPackable",true,true];

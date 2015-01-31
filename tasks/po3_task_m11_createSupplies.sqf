@@ -23,7 +23,7 @@ _returnPoint = format["return_point_%1",(PO3_side_1 select 0)] call PO3_fnc_getP
 
 _container1 = "B_supplyCrate_F" createVehicle _returnPoint;
 _container2 = "B_supplyCrate_F" createVehicle _returnPoint;
-[ _container1, _container2] call PO3_fnc_setAsLoadable;
+//[ _container1, _container2] call PO3_fnc_setAsLoadable;
 
 PO3_TOTAL_VEHICLES set [ count PO3_TOTAL_VEHICLES, _container1];
 PO3_TOTAL_VEHICLES set [ count PO3_TOTAL_VEHICLES, _container2];
