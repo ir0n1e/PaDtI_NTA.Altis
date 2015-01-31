@@ -105,7 +105,7 @@ null = [["city_1"],[0,0],[8,1],[4,1],[3],[_static],[0,0],[0,0,1500,EAST]] call N
 
 
 null = [["city_3"],[0,0],[8,1],[4,1],[3],[_static],[0,0],[0,0,1500,EAST]] call NTA_fnc_eos_core; 		//tres grande ville
-null = [["Pyrgos"],[5,1],[8,1],[4,1],[3],[_static],[0,0],[0,0,1500,EAST]] call NTA_fnc_eos_core; 		//tres grande ville
+null = [["Pyrgos"],[10,1],[8,1],[4,1],[3],[_static],[0,0],[0,0,1500,EAST]] call NTA_fnc_eos_core; 		//tres grande ville
 
 
 /*------------------------------------------- GRANDES VILLES ---------------------------------------------------------*/
