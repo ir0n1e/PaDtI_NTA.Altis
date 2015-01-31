@@ -184,7 +184,7 @@ _eosMarkers = server getvariable ["EOSmarkers", []];
 
 		_eosActive = createTrigger ["EmptyDetector", getmarkerpos _x];
 		_eosActive setTriggerArea [(_distance + _mkrX), (_distance + _mkrY), _mkrAgl, FALSE];
-		_eosActive setTriggerActivation ["WEST", "PRESENT", true];
+		_eosActive setTriggerActivation ["ANY", "PRESENT", true];
 		_eosActive setTriggerTimeout [10, 15, 20, true];
 		_eosActive setTriggerStatements [_actCond, "thisTrigger call NTA_fnc_eos_spawn", _dCon];
 
