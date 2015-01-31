@@ -35,17 +35,21 @@ NTA_Airpatrol_switchwp = {
 
 	[_grp, 2] setWaypointType "SAD";
 
-	{
-		vehicle _x setvariable ["airpatrol_mission", "Attacking", true]
-	} foreach units _grp;
+
 
 	if (_side == WEST && {NTA_airpatrolCache getvariable["NTA_Airpatrol_Serverside_West", false]} && {[getWPPos [_grp, 2], 500, 5, EAST] call NTA_fnc_core_findnearunits} && {((vehicle leader _grp) getvariable "airpatrol_mission") != "MovingHome"}) then {
 		"sad west" call nta_fnc_log;
 		_random = SADTIME + (random RANDOMTIME);
+		{
+			(vehicle _x) setvariable ["airpatrol_mission", "Attacking", true]
+		} foreach units _grp;
 	};
 
 	if (NTA_airpatrolCache getvariable["NTA_Airpatrol_Serverside_East", false] || {NTA_airpatrolCache getvariable["NTA_Airpatrol_CAS_West", false]}) then {
 		_random = SADTIME + (random RANDOMTIME);
+		{
+			(vehicle _x) setvariable ["airpatrol_mission", "Attacking", true]
+		} foreach units _grp;
 	};
 
 	waituntil {!alive (leader _grp) || {time > (_time + _random)}};

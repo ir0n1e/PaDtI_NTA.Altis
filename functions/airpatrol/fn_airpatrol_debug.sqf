@@ -28,7 +28,7 @@ _this spawn {
 				_u getvariable ["Airpatrol_Target", [0,0,0]],
 				_u distance (_u getvariable ["Airpatrol_Target", [0,0,0]]),
 				_u getvariable ["NTA_bombsAway", false],
-				_u getvariable ["Airpatrol_Mission", false],
+				_u getvariable ["Airpatrol_Mission", ""],
 				_u getvariable  ["NTA_Airpatrol_Crash", false]
 			];
 		} else {
