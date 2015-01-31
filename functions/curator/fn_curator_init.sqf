@@ -3,8 +3,12 @@ _unit = _this select 0;
 
 
 {
-	if (_unit in playableunits || {str _unit in call NTA_fnc_all_vehicles}) then {
+	if (str _x == "Zeus1" || {!isDedicated}) then {
 		_x addCuratorEditableObjects [[_unit], true];
+	} else {
+		if (_unit in playableunits || {str _unit in call NTA_fnc_all_vehicles}) then {
+			_x addCuratorEditableObjects [[_unit], true];
+		};
 	};
 } foreach allCurators;
 
