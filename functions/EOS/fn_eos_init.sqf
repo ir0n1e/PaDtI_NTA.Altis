@@ -122,10 +122,10 @@ null = [["city_38"],[0,0],[10,1],[1,1],[3],[_static],[0,0],[0,0,1500,EAST]] call
 //null = [["city_2"],[0,0],[10,1],[1,1],[3],[5],[0,0],[0,0,1500,EAST]] call NTA_fnc_eos_core; 	//grande ville déactivée
 
 // Iraklia
-null = [["city_47"],[0,0],[10,1],[1,1],[3],[_static],[0,0],[0,0,1500,EAST]] call NTA_fnc_eos_core;  //grande ville
+null = [["city_47"],[8,0],[10,1],[1,1],[3],[_static],[0,0],[0,0,1500,EAST]] call NTA_fnc_eos_core;  //grande ville
 
 // Molos
-null = [["city_13"],[4,0],[8,1],[0,0],[0],[0],[0,0],[0,2,1500,EAST]] call NTA_fnc_eos_core; 	//grande ville
+null = [["city_13"],[4,0],[8,1],[0,0],[0],[0],[0,0],[0,2,800,EAST]] call NTA_fnc_eos_core; 	//grande ville
 
 // Montagne Sud-Ouest
 null = [["city_20"],[0,0],[10,1],[1,1],[3],[_static],[0,0],[0,0,1500,EAST]] call NTA_fnc_eos_core;  //grande ville
