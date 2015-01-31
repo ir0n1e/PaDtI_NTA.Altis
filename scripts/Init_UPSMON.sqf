@@ -1,6 +1,5 @@
 // only run on server (including SP, MP, Dedicated) and Headless Client
-if (!isServer && hasInterface) exitWith {
-};
+if (!isServer && hasInterface ) exitWith {};
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -17,7 +16,7 @@ UPSMON_maxwaiting = 10;
 UPSMON_SRCHTIME = 90;
 
 // if you are spotted by AI group, how close the other AI group have to be to You , to be informed about your present position. over this, will lose target
-UPSMON_sharedist = 600; // org value 800 => increased for ArmA3 map sizes for less predictable missions..
+UPSMON_sharedist = 800; // org value 800 => increased for ArmA3 map sizes for less predictable missions..
 
 // knowsAbout 0.5 1.03 , 1.49 to add this enemy to "target list" (1-4) the higher number the less detect ability (original in 5.0.7 was 0.5)
 // it does not mean the AI will not shoot at you. This means: what must be knowsAbout you to UPSMON adds you to the list of targets (UPSMON list of target)
@@ -90,7 +89,7 @@ UPSMON_USE_SMOKE = 20; // org 13: decreased while AI is popping smoke a bit too 
 UPSMON_Allowfireplace = true;
 
 //Allow Units to Rearm
-UPSMON_AllowRearm = false;
+UPSMON_AllowRearm = true;
 
 //=============================================================================================================================
 //=============================== DO NOT TOUCH THESE VARIABLES ================================================================
@@ -99,7 +98,6 @@ UPSMON_AllowRearm = false;
 UPSMON_Version = "UPSMON 6.0.9.5";
 //Misc Array
 UPSMON_Total = 0;
-publicVariable "UPSMON_Total";
 UPSMON_Instances = 0;
 UPSMON_Exited = 0;
 UPSMON_AllWest = 0;
@@ -162,9 +160,7 @@ _center = nil;
 
 UPSMON = compile preProcessFileLineNumbers "Scripts\UPSMON.sqf";
 UPSMON_CreateGroup = compile preProcessFileLineNumbers "Scripts\UPSMON\UPSMON_CreateGroup.sqf";
-if (!isnil "HCPresent") then {
-	(owner NTAHC) publicVariableClient "UPSMON";
-};
+
 //Core
 call compile preProcessFileLineNumbers "Scripts\UPSMON\COMMON\Core\init.sqf";
 call compile preprocessFileLineNumbers "Scripts\UPSMON\Get_pos\UPSMON_pos_init.sqf";
@@ -212,8 +208,6 @@ _m setMarkerBrush "Solid";
 _m setmarkerAlpha 0;
 
 
-UPSMON_Total = 0;
-publicVariable "UPSMON_Total";
+
 //Initialization done
 UPSMON_INIT=1;
-publicvariable "UPSMON_INIT";

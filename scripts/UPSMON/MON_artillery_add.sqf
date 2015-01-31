@@ -1,10 +1,10 @@
 /*  =====================================================================================================
 	MON_spawn.sqf
-	Author: Monsada (chs.monsada@gmail.com)
-		Comunidad Hispana de Simulaci?n:
+	Author: Monsada (chs.monsada@gmail.com) 
+		Comunidad Hispana de Simulación: 
 		http://www.simulacion-esp.com
- =====================================================================================================
-	Par?meters: [_artillery,(_rounds,_area,_cadence,_mincadence)] execvm "scripts\UPSMON\MON_artillery_add.sqf";
+ =====================================================================================================		
+	Parámeters: [_artillery,(_rounds,_area,_cadence,_mincadence)] execvm "scripts\UPSMON\MON_artillery_add.sqf";	
 		<- _artillery 		object to attach artillery script, must be an object with gunner.
 		<- ( _rounds ) 		number of rounds for the artillery [FLARE,SMOKE,HE]
 		<- ( _area ) 		Dispersion area, 150m by default
@@ -26,12 +26,13 @@
 	For more info:
 	http://dev-heaven.net/projects/upsmon/wiki/Artillery_module
  =====================================================================================================*/
-//if (!isserver) exitWith {};
+//if (!isserver) exitWith {}; 
+if (!isServer) exitWith {};
 
 //Waits until UPSMON is init
 waitUntil {!isNil("UPSMON_INIT")};
 waitUntil {UPSMON_INIT==1};
-
+	
 private ["_area","_maxcadence","_mincadence","_rounds","_vector","_grpmission","_grp","_cfgArtillery","_grpunits","_batteryunits","_assistsmortar","_unit","_vehicle","_result","_staticteam","_artimuntype","_id","_foundshell","_foundsmoke","_foundrocket","_foundillum","_vector","_sidearty"];
 
 _area = 50;
@@ -44,13 +45,13 @@ If (!alive _unit) exitwith {};
 
 _grp = group _unit;
 
-if ((count _this) > 1) then {_rounds = _this select 1;};
-if ((count _this) > 2) then {_area = _this select 2;};
-if ((count _this) > 3) then {_maxcadence = _this select 3;};
+if ((count _this) > 1) then {_rounds = _this select 1;};	
+if ((count _this) > 2) then {_area = _this select 2;};	
+if ((count _this) > 3) then {_maxcadence = _this select 3;};	
 if ((count _this) > 4) then {_mincadence = _this select 4;};
 
-_grp setvariable ["UPSMON_Artilleryarea",_area,true];
-_grp setvariable ["UPSMON_Artillerymaxcadence",_maxcadence, true];
-_grp setvariable ["UPSMON_Artillerymincadence",_mincadence, true];
+_grp setvariable ["UPSMON_Artilleryarea",_area];
+_grp setvariable ["UPSMON_Artillerymaxcadence",_maxcadence];	
+_grp setvariable ["UPSMON_Artillerymincadence",_mincadence];
 
-[[_unit,"DummyUPSMONMarker","NOWP3"],"UPSMON", false, false] call bis_fnc_mp;
+[_unit,"DummyUPSMONMarker","NOWP3"] spawn UPSMON;

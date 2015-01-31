@@ -26,13 +26,15 @@ _i = 0;
 If (count _this > 5) then {_i = _this select 5;};
 
 If (_i > 3) exitwith {_units};
+if (isnil "_unitpos") then {
+	_unitpos = getposATL (_units select 0);
+};
 
 if (_spawn) then
 {
 	{
-		_pos2 = _lookpos findEmptyPosition [1,25];
+		_pos2 = _unitpos findEmptyPosition [1,25];
 		_x setposATL _pos2;
-		_unitpos = _pos2;
 	}foreach _units;
 };
 
@@ -41,7 +43,7 @@ _movetocover = [];
 (group (_units select 0)) setvariable ["UPSMON_Cover",true];
 if (UPSMON_Debug>0) then {player sidechat "Cover"};
 //potential cover objects list
-_objects = [(nearestObjects [_unitpos, ["All"], _dist]), { _x call UPSMON_fnc_filter } ] call BIS_fnc_conditionalSelect;
+_objects = [(nearestObjects [_unitpos, [], _dist]), { _x call UPSMON_fnc_filter } ] call BIS_fnc_conditionalSelect;
 
 _vdir = [_unitpos, _lookpos] call BIS_fnc_DirTo;
 
