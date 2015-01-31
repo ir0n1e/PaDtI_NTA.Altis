@@ -175,7 +175,7 @@ _this spawn {
 			_cGrp pushback _cGroup;
 			_allunits = _allunits + (units (_cGroup select 2));
 
-			0 = [leader (_cGroup select 2), _mkr, "SHOWMARKER","SPAWNED"] execVM "scripts\UPSMON.sqf";
+			0 = [leader (_cGroup select 2), _mkr, "SHOWMARKER", "SPAWNED", "AWARE", "LIMITED"] execVM "scripts\UPSMON.sqf";
 			cGroup 		= nil;
 		};
 	};
@@ -219,9 +219,9 @@ _this spawn {
 
 				if (_counter == _bGrps) then {
 
-					0 = [leader _bGroup, _mkr, "SHOWMARKER", "AMBUSH","RANDOM","SPAWNED"] execVM "scripts\UPSMON.sqf";
+					0 = [leader _bGroup, _mkr, "SHOWMARKER", "AMBUSH","RANDOM","SPAWNED", "LIMITED"] execVM "scripts\UPSMON.sqf";
 				} else {
-					0 = [leader _bGroup, _mkr, "SHOWMARKER","SPAWNED"] execVM "scripts\UPSMON.sqf";
+					0 = [leader _bGroup, _mkr, "SHOWMARKER", "SPAWNED", "SAFE", "LIMITED"] execVM "scripts\UPSMON.sqf";
 				};
 				bGroup = nil;
 			};
@@ -260,9 +260,9 @@ _this spawn {
 
 				0 = [_aGroup, "INFskill"] call NTA_fnc_eos_setSkill;
 				if (count _houses > 10) then {
-					0 = [leader _aGroup, _mkr, "SHOWMARKER", "RANDOMA","SPAWNED"] execVM "scripts\UPSMON.sqf";
+					0 = [leader _aGroup, _mkr, "SHOWMARKER", "RANDOMA","SPAWNED", "FORTIFY","NOWP", "SAFE", "LIMITED"] execVM "scripts\UPSMON.sqf";
 				} else {
-					0 = [leader _aGroup, _mkr, "SHOWMARKER","SPAWNED"] execVM "scripts\UPSMON.sqf";
+					0 = [leader _aGroup, _mkr, "SHOWMARKER","SPAWNED", "LIMITED", "SAFE"] execVM "scripts\UPSMON.sqf";
 				};
 				aGroup = nil;
 			};
@@ -295,7 +295,7 @@ _this spawn {
 			_dGrp pushback _dGroup;
 			_allunits = _allunits + (units (_dGroup select 2));
 
-			0 = [leader (_dGroup select 2), _mkr, "SHOWMARKER","SPAWNED"] execVM "scripts\UPSMON.sqf";
+			0 = [leader (_dGroup select 2), _mkr, "SHOWMARKER","SPAWNED", "LIMITED", "SAFE"] execVM "scripts\UPSMON.sqf";
 			dGroup = nil;
 		};
 	};
