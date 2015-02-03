@@ -199,12 +199,6 @@ if (_this getvariable ["eosclear", false]) exitwith {
 	_fGrps = 0;
 	["eos", 100] call NTA_fnc_core_addTickets;
 
-	if (_eosActive getvariable ["missionActive", false]) then {
-		{
-			deletevehicle _x;
-		} foreach (_eosActive getvariable ["missionObjects", []]);
-	};
-
 	deletemarker str _mkr;
 	_mkr setmarkercolor VictoryColor;
 	_mkr setmarkerAlpha _mAN;

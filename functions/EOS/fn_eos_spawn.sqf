@@ -349,7 +349,7 @@ _this spawn {
 
 		waituntil {({alive _x} count _allunit < 5) || !triggeractivated _trig};
 
-		if (EOS_ACTIVE && {{alive _x} count _allunit < 5} && {!(_trig getvariable ["SideMissionActive", false])}) then {
+		if (EOS_ACTIVE && {{alive _x} count _allunit < 5}) then {
 			_trig setvariable ['eosclear', true, true];
 			_mkr setmarkercolor VictoryColor;
 			_mkr setmarkerAlpha _mAN;
