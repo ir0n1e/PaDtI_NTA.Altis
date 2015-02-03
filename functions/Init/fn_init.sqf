@@ -10,6 +10,7 @@ nopop 		= true;
 enableSaving [false, false];
 enableTeamswitch false;
 enableEngineArtillery true;
+enableSentences false;
 
 0 = [] execvm "externScripts.sqf";
 
