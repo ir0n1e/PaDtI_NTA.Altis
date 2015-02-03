@@ -3,7 +3,7 @@
 _this spawn {
 
 	fn_taskDestroy = {
-		private ["_task", "_objects", "_time", "_tickets", "_briefing", "_pos", "_taskName", "_objectsArray"];
+		private ["_task", "_objects", "_time", "_tickets", "_briefing", "_pos", "_taskName", "_objectsArray", "allObjects"];
 		_task 		= _this select 0;
 		_objectsArray 	= _this select 1;
 		_pos		= _this select 2;
@@ -13,6 +13,7 @@ _this spawn {
 		_time 		= time;
 		_tickets	= (count _objects) * 15;
 		_briefing	= format [localize "STR_NTA_Missions_Destroy", date, TASK_TIME_SHORT/60, _tickets, _taskName];
+		_allObjects = server getvariable [_task, []];
 
 		[parseText _briefing, "hint"] call bis_fnc_mp;
 		[_task, format ["Destroy %1", _taskName] , _briefing] call SHK_Taskmaster_add;
@@ -30,10 +31,17 @@ _this spawn {
 			[_Task, "succeeded"] call SHK_Taskmaster_upd;
 			["Task", _tickets] call NTA_fnc_core_addTickets;
 		};
+
+		_time = time;
+		waitUntil {sleep 10; !({_x distance _this > 500} count playableUnits == 0) || {time >= (_time + (10*60))}};
+		{
+			deletevehicle _x;
+		} foreach _allObjects;
+
 	};
 
 	fn_taskKill = {
-		private ["_task", "_objects", "_time", "_tickets", "_briefing", "_pos", "_taskName"];
+		private ["_task", "_objects", "_time", "_tickets", "_briefing", "_pos", "_taskName", "_allObjects"];
 		_task 		= _this select 0;
 		_objects 	= _this select 1;
 		_pos		= _this select 2;
@@ -41,6 +49,7 @@ _this spawn {
 		_time 		= time;
 		_tickets	= (count _objects) * 60;
 		_briefing	= format [localize "STR_NTA_Missions_Kill", date, name (_objects select 0), TASK_TIME_SHORT/60, _tickets];
+		_allObjects = server getvariable [_task, []];
 
 		[parseText _briefing, "hint"] call bis_fnc_mp;
 		[_task, "Kill Objective" , _briefing] call SHK_Taskmaster_add;
@@ -53,11 +62,18 @@ _this spawn {
 			[_Task, "succeeded"] call SHK_Taskmaster_upd;
 			["Task", _tickets] call NTA_fnc_core_addTickets;
 		};
+
+		_time = time;
+		waitUntil {sleep 10; !({_x distance _this > 500} count playableUnits == 0) || {time >= (_time + (10*60))}};
+		{
+			deletevehicle _x;
+		} foreach _allObjects;
+
 	};
 
 
 	fn_taskIntel = {
-		private ["_task", "_object", "_time", "_tickets", "_briefing", "_pos", "_taskName", "_cacheType"];
+		private ["_task", "_object", "_time", "_tickets", "_briefing", "_pos", "_taskName", "_cacheType", "_allObjects"];
 		_task 		= _this select 0;
 		_object 	= _this select 1;
 		_pos		= _this select 2;
@@ -66,7 +82,7 @@ _this spawn {
 		_tickets	= 50;
 		_briefing	= format [localize "STR_NTA_Missions_Intel", date, TASK_TIME_SHORT/60, _tickets];
 		_cacheType 	= PO3_target_cache_types select ([west,east,resistance] find (PO3_side_3 select 0));
-
+		_allObjects = server getvariable [_task, []];
 
 		[parseText _briefing, "hint"] call bis_fnc_mp;
 		[_task, "Find Intel" , _briefing] call SHK_Taskmaster_add;
@@ -99,6 +115,12 @@ _this spawn {
 			[format ["%1C", _task], "succeeded"] call SHK_Taskmaster_upd;
 			["Task", _tickets] call NTA_fnc_core_addTickets;
 		};
+
+		_time = time;
+		waitUntil {sleep 10; !({_x distance _this > 500} count playableUnits == 0) || {time >= (_time + (10*60))}};
+		{
+			deletevehicle _x;
+		} foreach _allObjects;
 
 	};
 

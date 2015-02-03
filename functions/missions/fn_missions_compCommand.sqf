@@ -176,59 +176,6 @@ _objects = _objects + _objTargets;
 
 [_task, _newPos, "Command Post", [_objTargets, false], _unitTargets, _intel] call NTA_fnc_missions_addTask;
 
+server setvariable [_task, _objects, true];
+
 _objects
-
-/*
-sleep 360;
-{
-    deleteVehicle _x;
-} foreach _objects;
-*/
-/*
-fnc_bridgeA3 = {
-    private ["_start","_obj","_objPos","_objDir"];
-    _start = createVehicle [
-        _this select 2,
-        _this select 0,
-        [],
-        0,
-        "CAN_COLLIDE"
-    ];
-    _start setVectorUp [0,0,1];
-    _start setDir (_this select 1);
-    _start setPosATL (_this select 0);
-    for "_i" from 1 to (_this select 3) do {
-        _obj = createVehicle [
-            _this select 2,
-            _this select 0,
-            [],
-            0,
-            "CAN_COLLIDE"
-        ];
-        _obj attachTo [_start, [
-            _i*(_this select 4),
-            _i*(_this select 5),
-            _i*(_this select 6)
-        ]];
-        _objPos = getPosATL _obj;
-        _objDir = getDir _obj;
-        detach _obj;
-        _obj setPosATL _objPos;
-        _obj setDir _objDir;
-    };
-};
-
-[startingPosition, direction, objectClass, repeats, offsetX, offsetY, offsetZ]
-for "_c" from 0 to 15 do
-    {
-        _pos = [_flatPos, _distance, _dir] call BIS_fnc_relPos;
-        _barrier = "Land_HBarrier_3_F" createVehicle _pos;
-        waitUntil {alive _barrier};
-        _barrier setDir _dir;
-        _dir = _dir + 22.5;
-
-        _unitsArray = _unitsArray + [_barrier];
-    };
-
-
-*/

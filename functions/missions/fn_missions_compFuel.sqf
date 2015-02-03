@@ -175,5 +175,6 @@ for "_i" from 0 to 1 do {
 };
 
 [_task, _newPos, "Fuel Post", [_objTargets, _dam]] call NTA_fnc_missions_addTask;
+server setvariable [_task, _objects, true];
 
 _objects
