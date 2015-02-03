@@ -1,6 +1,6 @@
 _this addEventHandler ["killed",{
 	(_this select 0) spawn {
-		if ((_this select 0) in playableUnits) exitwith {};
+		if (_this in playableUnits) exitwith {};
 		_time = time;
 		sleep (5*60);
 
