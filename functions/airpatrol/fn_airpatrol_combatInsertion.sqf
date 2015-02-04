@@ -84,7 +84,6 @@ _this spawn {
 		};
 	};
 
-	_vehicle setCombatMode "YELLOW";
 	_vehicle animateDoor ['door_L', 0];
 	_vehicle animateDoor ['door_R', 0];
 	_vehicle animateDoor ['Door_rear_source', 0];
@@ -92,6 +91,7 @@ _this spawn {
 	/* Exit the script. */
 	if (true) exitwith {
 		sleep 0.8;
+		_vehicle setCombatMode "RED";
 
 	};
 };

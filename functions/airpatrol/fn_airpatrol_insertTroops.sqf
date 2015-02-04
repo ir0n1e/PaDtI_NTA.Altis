@@ -74,17 +74,17 @@ for "_i" from 0 to (count _vehicles) -1 do {
 
 	_pos = [(_landPos select _i), -850, (_dir -30)] call BIS_fnc_relPos;
 
-	_wp = [group (_vehicles select _i), 1, _pos, 'NORMAL', 'MOVE', 'CARELESS', 'GREEN', ['true', '{_x flyInHeight 35} foreach thislist']] call NTA_fnc_vehicles_addwaypoint;
+	_wp = [group (_vehicles select _i), 1, _pos, 'NORMAL', 'MOVE', 'CARELESS', 'RED', ['true', '{_x flyInHeight 35; _x setcombatmode "RED"} foreach thislist']] call NTA_fnc_vehicles_addwaypoint;
 	_wp setWaypointCompletionRadius 200;
 
-	_wp = [group (_vehicles select _i), 2, (_landPos select _i), 'FULL', 'TR UNLOAD', 'CARELESS', 'YELLOW', ['true', '{_x flyInHeight 35} foreach thislist']] call NTA_fnc_vehicles_addwaypoint;
+	_wp = [group (_vehicles select _i), 2, (_landPos select _i), 'FULL', 'TR UNLOAD', 'CARELESS', 'RED', ['true', '{_x flyInHeight 35; _x setcombatmode "RED"} foreach thislist']] call NTA_fnc_vehicles_addwaypoint;
 	_wp setWaypointCompletionRadius 200;
 
 	_Pos = (_vehicles select _i) getvariable ["Airpatrol_EndPos", [0,0,0]];
 
 
 
-	_wp = [group (_vehicles select _i), 3, _Pos, 'FULL', 'MOVE', 'CARELESS', 'GREEN', ['true', '{[_x] call NTA_fnc_vehicles_delete} forEach thislist']]  call NTA_fnc_vehicles_addwaypoint;
+	_wp = [group (_vehicles select _i), 3, _Pos, 'FULL', 'MOVE', 'CARELESS', 'RED', ['true', '{[_x] call NTA_fnc_vehicles_delete} forEach thislist']]  call NTA_fnc_vehicles_addwaypoint;
 	_wp setWaypointCompletionRadius 200;
 	[_inf, (_vehicles select _i), _pad, _apUserInsert, false] call NTA_fnc_airpatrol_combatInsertion;
 };
