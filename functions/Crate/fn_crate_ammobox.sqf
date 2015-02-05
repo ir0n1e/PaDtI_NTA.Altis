@@ -37,8 +37,5 @@ if (isClass(configFile/"CfgPatches"/"BWA3_Common")) then {
 	_crate addItemcargoGlobal ["BWA3_acc_LLM01_irlaser",2];
 	_crate addItemcargoGlobal ["BWA3_optic_Shortdot",1];
 	_crate addItemcargoGlobal ["BWA3_optic_ZO4x30_NSV",5];
+	_crate addBackpackCargoGlobal ["BWA3_AssaultPack_Medic",2];
 };
-
-_crate call NTA_fnc_crate_xmedsys_medic;
-_crate call NTA_fnc_crate_agmmedsys_medic;
-_crate call NTA_fnc_crate_tfr;
