@@ -2,7 +2,8 @@ if (!isserver) exitwith {};
 
 0 spawn {
 	_date = date;
-
+	PO3_force_TASKEND = true;
+	publicVariable "PO3_force_TASKEND";
 
 	[[date select 0, date select 1, date select 2, 23, 0],"NTA_fnc_setDate",true,false] spawn BIS_fnc_MP;
 	_briefing 	= format [localize "STR_NTA_Missions_Dam", date, 100];
@@ -31,7 +32,9 @@ if (!isserver) exitwith {};
 	{
 		deletevehicle _x;
 	} foreach ((server getvariable "DamUnits") + (server getvariable "DamObjects"));
+
+	deleteVehicle DamTrigger;
 	DAMACTIVE = false;
-	publicVariable "Damactive";
-	[_date,"NTA_fnc_setDate",true,false] spawn BIS_fnc_MP;
+	publicVariable "EOS_ACTIVE";
+	[_date, "NTA_fnc_setDate", true, false] spawn BIS_fnc_MP;
 };

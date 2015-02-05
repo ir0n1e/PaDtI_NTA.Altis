@@ -8,7 +8,6 @@ EOS_active_fnc = {
 	_mPos 		= _settings select 2;
 
 	{
-		str [_mkr, _x] call NTA_fnc_log;
 		if ( _x != _mkr && {MarkerAlpha _x != 0 || {getmarkercolor _mkr != VictoryColor} || {MarkerAlpha _x != 0.0001}}) then {
 			_x setmarkerAlpha 0.0001;
 		};
