@@ -28365,7 +28365,7 @@ class Mission
 	};
 	class Sensors
 	{
-		items=17;
+		items=16;
 		class Item0
 		{
 			position[]={19901.734,44.730564,14753.91};
@@ -28610,25 +28610,6 @@ class Mission
 			expActiv="_t = ""Chemlight_blue"" createVehicle getposATL thisTrigger;";
 			class Effects
 			{
-			};
-		};
-		class Item16
-		{
-			position[]={9257.3301,29.028343,13832.918};
-			a=180;
-			b=200;
-			rectangular=1;
-			activationBy="WEST";
-			activationType="EAST D";
-			interruptable=1;
-			type="SWITCH";
-			age="UNKNOWN";
-			name="DamTrigger";
-			expCond="this && damactive && {vehicle _x in thisList && isplayer _x && ((getPosATL _x) select 2) < 15} count playableunits > 0";
-			expActiv="[thistrigger, damactive] call NTA_fnc_spawnFlare;[[server getvariable 'DamLamps', true],'NTA_fnc_lamps_LampSwitch', nil, true] call BIS_fnc_MP;  [EAST,[10892.2,8552.28,0], nil, getpos ([getpos thistrigger, 1000, playableunits] call NTA_fnc_core_findnearestobject), ['O_Heli_Light_02_unarmed_F', 'O_Heli_Transport_04_bench_F']] call NTA_fnc_airpatrol_callGroup;  {[_x,currentWaypoint _x, getpos ([getpos thistrigger, 1000, playableunits] call NTA_fnc_core_findnearestobject), 'FULL','SAD','Combat'] call NTA_fnc_vehicles_addwaypoint} foreach (server getvariable ['Dampatrols',[]]);";
-			class Effects
-			{
-				soundDet="AlarmSfx";
 			};
 		};
 	};
