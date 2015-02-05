@@ -35,6 +35,7 @@ PO3_missions = [
 publicvariable "PO3_missions";
 PO3_ForceTask = [false, ""];
 PO3_TASK__POS = [0,0,0];
+damactive = false;
 _list = PO3_missions;
 _eosMarkers=server getvariable "EOSmarkers";
 _mkrArray = [];
@@ -45,6 +46,7 @@ _prev = _list;
 _missioncount = if(isNil "PO3_param_missioncount") then { 3 }else{ PO3_param_missioncount };
 if !(PO3_debug) then { sleep 30 };
 while { _missioncount != 0 } do {
+	waituntil {!damactive};
 	if (!(PO3_ForceTask select 0)) then {
 		_lim = 0;
 		while{ _next IN _prev && _lim < count _list } do {
@@ -61,7 +63,7 @@ while { _missioncount != 0 } do {
 	sleep 5;
 	waituntil {count _mkrArray == 0};
 
-	_TASK_Script = execvm format["tasks\%1.sqf",_next];
+	_TASK_Script = execvm format["tasks\%1.sqf", _next];
 	format ["Task isHC: %1 isServer: %2", (!isServer && !hasinterface), isserver] call NTA_fnc_log;
 
 	/*if (!isnil "HCPresent") then {
