@@ -3,7 +3,7 @@
 _this spawn {
 
 	fn_taskDestroy = {
-		private ["_task", "_objects", "_time", "_tickets", "_briefing", "_pos", "_taskName", "_objectsArray", "allObjects"];
+		private ["_task", "_objects", "_time", "_tickets", "_briefing", "_pos", "_taskName", "_objectsArray", "_allObjects"];
 		_task 		= _this select 0;
 		_objectsArray 	= _this select 1;
 		_pos		= _this select 2;

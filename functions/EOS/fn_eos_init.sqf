@@ -62,6 +62,7 @@ publicvariable "EOS_ACTIVE";
 
 _time = time;
 _static = random 3;
+call NTA_fnc_eos_postInit;
 
 /*---------------------------------------------- DEFENSE --------------------------------------------------------*/
 

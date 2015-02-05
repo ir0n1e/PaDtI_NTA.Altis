@@ -61,6 +61,7 @@
 			class eos_bastionCore;
 			class eos_bastionLoop;
 			class eos_bastionSpawn;
+			class eos_postInit;
 		};
 
 	class Houses {

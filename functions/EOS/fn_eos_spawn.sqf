@@ -60,60 +60,22 @@ _this spawn {
 	_fgrp 			= [];
 	_allunits 		= [];
 
+	if (getmarkercolor _mkr == "colorblack" || {getMarkerColor _mkr == VictoryColor}) exitwith {};
+
+	// AO marker (String)
+	_markerstr = createMarker [str _mkr, _mPos];
+	_markerstr setMarkerShape "ICON";
+	_markerstr setMarkerType "MIL_DOT";
+	_markerstr setMarkerColor "ColorBlack";
+	_markerstr setMarkertext format ["AO %1", _mkr];
+	_mkr setmarkerAlpha _mAH;
+
 
 	EOS_ACTIVE = true;
 	publicVariable "EOS_ACTIVE";
 	popEOS = true;
 	publicVariable "popEOS";
-
-	if (getmarkercolor _mkr == "colorblack") exitwith {};
-	if !(getmarkercolor _mkr == VictoryColor)then {
-		{
-			if (MarkerAlpha _x != 0) then {
-				_x setmarkerAlpha 0.0001;
-			};
-		} foreach (server getvariable ["EOSmarkers", []]);
-		// AO marker (String)
-		_markerstr = createMarker [str _mkr, _mPos];
-		_markerstr setMarkerShape "ICON";
-		_markerstr setMarkerType "MIL_DOT";
-		_markerstr setMarkerColor "ColorBlack";
-		_markerstr setMarkertext format ["AO %1", _mkr];
-		_mkr setmarkerAlpha _mAH;
-	};
-
-	_pos = [_mPos, [1000, 3000], 10, 0] call PO3_fnc_getSafePos;
-	_dir = [_mPos, _pos] call BIS_fnc_dirTo;
-
-	if (floor (random 3) == 0) then {
-		[[_Pos select 0, _Pos select 1, 0], _dir] execvm "test\arty.sqf";
-	};
-
-	//airpatrol
-	[_mpos, _eosActive] spawn {
-		_mpos 		= _this select 0;
-		_trig 		= _this select 1;
-		_time 		= time;
-		_mission	= [NTA_fnc_missions_compFuel, NTA_fnc_missions_compCommand] call NTA_fnc_getRandArrayPos;
-		waituntil {time >= (_time + 120) || {!triggeractivated _trig} || {{_x distance _mpos < 350} count playableunits > 0}};
-
-		if (!triggeractivated _trig) exitwith {};
-
-
-		if ((({_x distance _mpos < 500} count playableunits) > 0) && {!(_trig getvariable ["SideMissionActive", false])}) then {
-			_objects = [[_mPos select 0, _mPos select 1, 0]] call _mission;
-			_trig setvariable ["SideMissionActive", true, true];
-			_trig setvariable ["missionObjects", _objects, true];
-		};
-
-		if (({_x distance _mpos < 350} count playableunits) > 0) then {
-			{
-				if (_x distance _mpos < 350) exitwith {
-					_x call NTA_fnc_airpatrol_callRandom;
-				};
-			} count playableunits;
-		};
-	};
+	server setVariable ["EOS_ACTIVE_SETTINGS", [_eosActive, _mkr, _mPos], true];
 
 	// SPAWN STATIC PLACEMENTS
 	for "_counter" from 1 to _eGrps do {
@@ -354,12 +316,6 @@ _this spawn {
 			_mkr setmarkercolor VictoryColor;
 			_mkr setmarkerAlpha _mAN;
 			deletemarker str _mkr;
-
 		};
-		{
-			if (!(getmarkercolor _x == VictoryColor) && {MarkerAlpha _x == 0.0001}) then {
-				_x setmarkerAlpha (_trig getVariable "EOSmarkerColor" select 0);
-			};
-		} foreach (server getvariable ["EOSmarkers", []]);
 	};
 };
