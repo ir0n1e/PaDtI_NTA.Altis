@@ -1,3 +1,4 @@
+if (isclass (configfile >> "CfgPatches" >> "rhs_infantry")) exitwith {};
 
 removeAllWeapons _this;
 removeAllItems _this;
