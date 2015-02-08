@@ -12,13 +12,13 @@
 IL_Debug = false; 			//Enable Debug Mode
 IL_Balls = false; 			//Show the attach points (requires Debug mode)
 IL_Crew_Only = true; 		//Only allow Pilot/Driver/Co-Pilot/Gunner/Commander (does not include left & right gunners for choppers) to change the light
-IL_Red_On_Always = true; 	//When true, when light is turned off then on the light will be reset to red else it will never be reset if false
-IL_Action_Night = true; 	//Only allow the action to come up during the Dark times
+IL_Red_On_Always = false; 	//When true, when light is turned off then on the light will be reset to red else it will never be reset if false
+IL_Action_Night = false; 	//Only allow the action to come up during the Dark times
 /*End Definable*/
 /*Start Script*/
 IL_Loaded = false;
 
-if (isDedicated) exitWith {};
+
 
 waitUntil {!isNull player};
 
@@ -34,7 +34,8 @@ IL_c_green = [0,255,0];
 IL_c_blue = [0,0,255];
 IL_c_yellow = [255,200,0];
 IL_c_orange = [255,75,0];
-
+publicVariable "IL_c_green";
+publicVariable "IL_C_red";
 // predefined default values used in the config below
 IL_attenuation = [0.3,0,0,500];
 IL_att_soft = [0,10,10,10];
@@ -184,10 +185,13 @@ IL_config = IL_config + [
 	[["CH_47F_base"], false, [
 		 [ [0,-2,-1], IL_c_red, IL_att_soft, 0.5 ],
 		 [ [0,3,-0.83], IL_c_red, IL_att_soft, 0.5 ]
-	],true,2]
+	],true,2],
+	[["sab_C130_JE"], false, [
+		 [[0,-0.5,-2], IL_c_red, IL_attenuation, IL_intensity ]
+	],true]
 ];
 // The config-array can be modified at runtime. This also allows modautors to append their own settings without having to edit this script.
-
+publicVariable "IL_config";
 
 diag_log "IL config done";
 
@@ -195,6 +199,7 @@ diag_log "IL config done";
 IL_typelist = [];
 IL_lights = [];
 IL_varname = "interiorlight";
+publicVariable "il_varname";
 IL_text_ON = "<t color='#FF0000'>Turn Interior Light ON</t>";
 IL_text_OFF = "<t color='#FF0000'>Turn Interior Light OFF</t>";
 IL_Green_Text = "<t color='#00FF00'>Change Light to Green</t>";
@@ -219,7 +224,7 @@ IL_fnc_inList = {
 
 IL_fnc_returnTurretUnits = {
 	_peeps = [];
-	_turrets = allTurrets [_this,false];
+	_turrets = allTurrets [_this, false];
 	{
 		if (!isNull (_this turretUnit _x)) then {_peeps pushBack (_this turretUnit _x)};
 	}forEach _turrets;
@@ -403,7 +408,7 @@ IL_fnc_addAction = {
 };
 
 diag_log "IL func loaded";
-
+if (isDedicated) exitWith {};
 // init
 [] spawn IL_fnc_addAction;
 player addEventHandler ["Respawn", {
