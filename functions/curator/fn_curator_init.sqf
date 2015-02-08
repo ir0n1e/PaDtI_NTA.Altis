@@ -3,7 +3,7 @@ _unit = _this select 0;
 
 
 {
-	if (str _x == "Zeus1") then {
+	if (str _x == "Zeus1" || {isserver}) then {
 		_x addCuratorEditableObjects [[_unit], true];
 	} else {
 		if (_unit in playableunits || {str _unit in call NTA_fnc_all_vehicles}) then {
