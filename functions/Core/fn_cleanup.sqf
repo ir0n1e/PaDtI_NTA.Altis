@@ -1,8 +1,8 @@
 _this addEventHandler ["killed",{
 	(_this select 0) spawn {
 		if (_this in playableUnits) exitwith {};
-		_time = time;
 		sleep (5*60);
+		_time = time;
 
 		waitUntil {sleep 10; !({_x distance _this > 500} count playableUnits == 0) || {time >= (_time + (10*60))}};
 
