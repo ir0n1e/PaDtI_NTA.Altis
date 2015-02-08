@@ -79,7 +79,7 @@ NTA_airpatrolCache setvariable["NTA_Airpatrol_West", grpnull, true];
 NTA_airpatrolCache setvariable["NTA_Airpatrol_East", grpnull, true];
 NTA_airpatrolCache setvariable["NTA_Airpatrol_CASunit_WEST", "none", true];
 
-if (USERINSERTION) then {
+if (USERINSERTION && {!isnil "D_FLAG_BASE"}) then {
 	[D_FLAG_BASE, "Chopper Insertion", 10, {true}, {
 		(_this select 1) setvariable [format ["insert%1", group (_this select 1)],
 		[]];

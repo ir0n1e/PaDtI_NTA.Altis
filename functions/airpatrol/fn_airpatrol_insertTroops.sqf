@@ -1,4 +1,4 @@
-private ["_inf", "_vehicles", "_targetPos", "_grp", "_landPos", "_min", "_max", "_vehname", "_apUserInsert", "_apUser", "_padClass", "_pos", "_dir"];
+private ["_inf", "_vehicles", "_targetPos", "_grp", "_landPos", "_min", "_max", "_vehname", "_apUserInsert", "_apUser", "_padClass", "_pos", "_dir", "_rhsgrp"];
 
 
 
@@ -47,11 +47,16 @@ if (_counter == 5 || {count _landPos < (count _vehicles)}) exitWith {
 };
 */
 deletemarker _marker;
+_rhsgrp = (configfile >> "CfgGroups" >> "East" >> "OPF_F" >> "Infantry" >> "OIA_InfTeam");
+
+if (isclass (configfile >> "CfgPatches" >> "rhs_infantry")) then {
+	_rhsgrp = (configfile >> "CfgGroups" >> "East" >> "rhs_faction_msv" >> "rhs_group_rus_msv_infantry" >> "rhs_group_rus_msv_infantry_fireteam");
+};
 
 for "_i" from 0 to (count _vehicles) -1 do {
 
 	if (!_apUserInsert) then {
-		_infgroup = [[0,0,0], EAST, (configfile >> "CfgGroups" >> "East" >> "OPF_F" >> "Infantry" >> "OIA_InfTeam")] call BIS_fnc_spawnGroup;
+		_infgroup = [[0,0,0], EAST, _rhsgrp] call BIS_fnc_spawnGroup;
 		[_infgroup,'', (_landPos select _i), "FULL", "GETOUT"]  call NTA_fnc_vehicles_addwaypoint;
 		[_infgroup,'', _targetPos, "FULL", "SAD"] call NTA_fnc_vehicles_addwaypoint;
 		_inf = units _infgroup;

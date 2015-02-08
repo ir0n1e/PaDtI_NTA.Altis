@@ -37,7 +37,7 @@ NTA_Airpatrol_switchwp = {
 
 
 
-	if (_side == WEST && {NTA_airpatrolCache getvariable["NTA_Airpatrol_Serverside_West", false]} && {[getWPPos [_grp, 2], 500, 5, EAST] call NTA_fnc_core_findnearunits} && {((vehicle leader _grp) getvariable "airpatrol_mission") != "MovingHome"}) then {
+	if (_side == WEST && {NTA_airpatrolCache getvariable["NTA_Airpatrol_Serverside_West", false]} && {[getWPPos [_grp, 2], 1000, 3, EAST] call NTA_fnc_core_findnearunits} && {((vehicle leader _grp) getvariable "airpatrol_mission") != "MovingHome"}) then {
 		"sad west" call nta_fnc_log;
 		_random = SADTIME + (random RANDOMTIME);
 		{
@@ -61,7 +61,7 @@ NTA_Airpatrol_switchwp = {
 
 _wp = [_grp, '', ([_targetPos, 1000, (getdir leader _grp) -180 ] call BIS_fnc_relPos), "NORMAL", "MOVE","CARELESS","GREEN",['true', '{_x flyInHeight 50} foreach thislist; [this] spawn NTA_AIRPATROL_switchwp']] call NTA_fnc_vehicles_addwaypoint;
 
-_wp = [_grp, '', _targetPos, "NORMAL", "MOVE", "COMBAT", "RED"] call NTA_fnc_vehicles_addwaypoint;
+_wp = [_grp, '', _targetPos, "NORMAL", "MOVE", "COMBAT", "RED", ['true', '{_x setcombatmode "RED"} foreach thislist']] call NTA_fnc_vehicles_addwaypoint;
 _wp setWaypointCompletionRadius 500;
 
 _wp = [_grp, '', _endPos, "NORMAL", "MOVE", "CARELESS", "BLUE", ["true", "{[_x] call NTA_fnc_vehicles_delete} foreach thislist"]] call NTA_fnc_vehicles_addwaypoint;
