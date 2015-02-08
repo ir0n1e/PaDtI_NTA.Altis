@@ -1,5 +1,5 @@
 private ["_airfield","_landingzone","_rollway","_field1","_field2","_time","_grp"];
-
+/*
 _airfield = createMarker ["Airfield", [21118.875,7322.1602,0]];
 _airfield setMarkerShape "RECTANGLE";
 _airfield setMarkerSize [250, 20];
@@ -68,7 +68,7 @@ publicVariable "AIRFIELD_bombMarkers";
 AIRFIELD_Markers = ["Airfield","rollway","field1","field2","bomb_hoehe101","feres", "selakano", "hoehe101", "landingzone"];
 publicVariable "AIRFIELD_Markers";
 
-
+*/
 wrackfuel1 = "";
 wrackfuel2 = "";
 AIRFIELD_call_csatplane  = compile preprocessFileLineNumbers "event\callcsatplane.sqf";
@@ -79,7 +79,8 @@ AIRFIELD_Roadblock = compile preprocessFileLineNumbers "event\roadblock.sqf";
 AIRFIELD_call_blackhawk = compile preprocessFileLineNumbers "event\callblackhawk.sqf";
 AIRFIELD_call_c130east = compile preprocessFileLineNumbers "event\callc130east.sqf";
 AIRFIELD_Parachute = compile preprocessFileLineNumbers "event\parachute.sqf";
-
+AIRFIELD_Positions = compile preprocessFileLineNumbers "test\positions.sqf";
+/*
 mainTrigger = createTrigger ["EmptyDetector", [20549,7973.7427,33.284595]];
 mainTrigger setTriggerArea [2000,50,-17.3901,true];
 mainTrigger setTriggerActivation ["WEST", "PRESENT", false];
@@ -100,7 +101,7 @@ for "_i" from 1 to 3 step +1  do {
 
 
 };
-/*
+
 [] spawn AIRFIELD_Roadblock;
 
 waitUntil {(str(wrackfuel1) == "<NULL-object>") or (str(wrackfuel2) == "<NULL-object>")};
