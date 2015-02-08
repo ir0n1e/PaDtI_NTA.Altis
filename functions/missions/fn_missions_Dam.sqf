@@ -5,7 +5,7 @@ if (!isserver) exitwith {};
 	PO3_force_TASKEND = true;
 	publicVariable "PO3_force_TASKEND";
 
-	[[date select 0, date select 1, date select 2, 23, 0],"NTA_fnc_setDate",true,false] spawn BIS_fnc_MP;
+	[[date select 0, date select 1, date select 2, 3, 30],"NTA_fnc_setDate",true,false] spawn BIS_fnc_MP;
 	_briefing 	= format [localize "STR_NTA_Missions_Dam", date, 100];
 
 	[parseText _briefing, "hint"] call bis_fnc_mp;

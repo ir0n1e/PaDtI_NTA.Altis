@@ -32,7 +32,7 @@ fnc_dam_active = {
 };
 
 DamTrigger = createTrigger ["EmptyDetector", [9257.33,13832.9,0]];
-DamTrigger setTriggerArea [200, 180, 90, true];
+DamTrigger setTriggerArea [300, 250, 90, true];
 DamTrigger setTriggerType "SWITCH";
 DamTrigger setTriggerActivation ["WEST", "EAST D", false];
 DamTrigger setSoundEffect ["Alarm", "", "", ""];
@@ -314,6 +314,9 @@ for "_i" from 0 to 4 do {
     _objects pushback _obj;
 
 };
+_obj =  "O_supplyCrate_F" createvehicle [9323.86,13697.1,0.00176239];
+_obj addMagazinecargoGlobal ["DemoCharge_Remote_Mag", 8];
+_objects pushBack _obj;
 
 server setvariable ["DamPipe", _pipe, true];
 server setvariable ["DamLamps", [_lamps, "NTA_DamLamps_on"], true];
