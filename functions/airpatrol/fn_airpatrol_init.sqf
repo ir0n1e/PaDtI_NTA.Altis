@@ -1,4 +1,3 @@
-scriptName "fn_airpatrol_init";
 /*
 	Author: Ir0n1E
 
@@ -9,9 +8,19 @@ scriptName "fn_airpatrol_init";
 	#0 NUMBER - Initial waittime
 	#1 NUMBER - Waittime between spawn
 	#2 NUMBER - Delete Patrol after this
+	#3 ARRAY  - Start Position (optional)
+	#4 ARRAY  - End Position (optional)
+
 
 	Returns:
 	NONE
+
+	Example:
+	[1800, 1800, 3600, getmarkerpos "foo", [0,0,0]] call NTA_fnc_airpatrol_init
+	[0,0,0] call NTA_fnc_airpatrol_init (disables Airpatrol loop)
+
+	Note:
+	For Userinsertion name an object 'NTA_Airpatrol_UserInsertion_Obj'
 */
 // start [28713.2,27432.7,0]
 // end [1637.84,13848.8,0]
@@ -79,14 +88,18 @@ NTA_airpatrolCache setvariable["NTA_Airpatrol_West", grpnull, true];
 NTA_airpatrolCache setvariable["NTA_Airpatrol_East", grpnull, true];
 NTA_airpatrolCache setvariable["NTA_Airpatrol_CASunit_WEST", "none", true];
 
-if (USERINSERTION && {!isnil "D_FLAG_BASE"}) then {
-	[D_FLAG_BASE, "Chopper Insertion", 10, {true}, {
+if (USERINSERTION && {!isnil "NTA_Airpatrol_UserInsertion_Obj"}) then {
+	[NTA_Airpatrol_UserInsertion_Obj, "Chopper Insertion", 10, {true}, {
 		(_this select 1) setvariable [format ["insert%1", group (_this select 1)],
 		[]];
 		[_this select 1] call NTA_fnc_airpatrol_agmOpenInsertMenu
 		},
 		false
 	] call AGM_Interaction_fnc_addInteraction;
+};
+
+if (_this select 0 == 0 && {_this select 1 == 0} && {_this select 2 == 0}) exitwith {
+	"NO Airpatrol loop" call NTA_fnc_log;
 };
 
 _this spawn {
