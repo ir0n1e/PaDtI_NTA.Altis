@@ -301,7 +301,7 @@ class DLL
 class PO3 {
 	tag = "PO3";
 	class Camera {
-		file = "fnc\camera";
+		file = "functions\PO3\camera";
 		class camera_fadein;
 		class camera_fadeout;
 		class camera_path;
@@ -311,7 +311,7 @@ class PO3 {
 	};
 
 	class EventHandlers {
-		file = "fnc\eventhandlers";
+		file = "functions\PO3\eventhandlers";
 		class setContactStartEH_CRV;
 		class setDamageEH;
 		class setDamageEH_AI;
@@ -323,7 +323,7 @@ class PO3 {
 	};
 
 	class Interactions {
-		file = "fnc\interact";
+		file = "functions\PO3\interact";
 		class checkActionBusy;
 		class setActionBusy;
 		class interaction_else {ext=".fsm";};
@@ -331,7 +331,7 @@ class PO3 {
 	};
 
 	class Core {
-		file = "fnc\core";
+		file = "functions\PO3\core";
 		class animateUnit;
 		class boundingBoxLWH;
 		class change_direction;
@@ -361,7 +361,7 @@ class PO3 {
 		class hlc_sendKeepAlive;
 	};
 	class Creator {
-		file = "fnc\creator";
+		file = "functions\PO3\creator";
 		class cleanup;
 		class createGroup;
 		class createMinefield;
@@ -392,7 +392,7 @@ class PO3 {
 		class supportCreateUGV;
 	};
 	class Position {
-		file = "fnc\position";
+		file = "functions\PO3\position";
 		class getflatarea;
 		class getNearbyBuildings;
 		class getNearbyPlayers;
@@ -426,7 +426,7 @@ class PO3 {
 	};
 
 	class Intel {
-		file = "fnc\intel";
+		file = "functions\PO3\intel";
 		class chat;
 		class hint;
 		class progressbar;
@@ -465,7 +465,7 @@ class PO3 {
 	};
 
 	class Tasks {
-		file = "fnc\taskmaster";
+		file = "functions\PO3\taskmaster";
 		class runTaskSequence;
 		class runTasksRandom;
 		class addTask;
