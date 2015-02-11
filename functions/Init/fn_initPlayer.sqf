@@ -79,7 +79,7 @@ player addeventhandler ["respawn", {
 [player] call NTA_fnc_players_actions;
 [] call NTA_fnc_AGM_addadminActions;
 [] call NTA_fnc_airpatrol_agmAddaction;
-
+[] call IL_fnc_init;
 [] call NTA_fnc_welcome;
 
 

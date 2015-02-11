@@ -167,6 +167,7 @@
 		class airpatrol_Create;
 		class airpatrol_init;
 		class airpatrol_insertTroops;
+		class airpatrol_insertParaTroops;
 		class airpatrol_debug;
 		class airpatrol_agmAddaction;
 		class airpatrol_movegroupHome;
@@ -485,5 +486,20 @@ class PO3 {
 		class skipTask;
 		class taskmaster;
 		class updateLocalTask;
+	};
+};
+class IL {
+	tag = "IL";
+	class Core {
+		file = "functions\vehicle_lights";
+		class actions;
+		class config;
+		class init;
+		class inList;
+		class returnTurretUnits;
+		class switchGreen;
+		class switchGreenCondition;
+		class switchOn;
+		class switchOnCondition;
 	};
 };

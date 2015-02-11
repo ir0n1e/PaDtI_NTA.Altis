@@ -15,7 +15,6 @@ _gradient 		= 0.3;
 _counter 		= 5;
 _padClass 		= "Land_HelipadEmpty_F";
 _landpos 		= [];
-_ounter 		= 0;
 _marker = createMarker ["marker_player", _targetPos];
 _marker setMarkerShape "RECTANGLE";
 _marker setMarkerSize [_ym, _xm];
@@ -32,7 +31,7 @@ while {count _landPos < (count _vehicles) && {{alive _x} count _vehicles == (cou
 */
 
 {
-	_landPos  pushback ([_marker, [(1 +_foreachIndex) *_ym, _ym], 10, 0] call PO3_fnc_getSafePos);
+	_landPos  pushback ([_marker, [_ym + (_foreachindex * 10),  _ym], 10, 0] call PO3_fnc_getSafePos);
 } foreach _vehicles;
 
 /*

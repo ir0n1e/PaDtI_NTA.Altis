@@ -18,9 +18,5 @@ _grp 	= createGroup _side;
 
 _veharray = [_pos, _dir, _type, _side] call BIS_fnc_spawnVehicle;
 _vehicle = _veharray select 0;
-/*
-{
-	_x setVariable ["AGM_AllowUnconscious", false, true];
-} foreach units _grp;
-*/
+
 _vehicle

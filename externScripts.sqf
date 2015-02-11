@@ -5,7 +5,7 @@ call compile preprocessfilelinenumbers "scripts\shk_taskmaster.sqf";
 
 
 if (("NTA_LIGHTS" call bis_fnc_getParamValue) > 0) then {
-	execvm "scripts\intLight.sqf";
+	//execvm "scripts\intLight.sqf";
 };
 
 if (("NTA_Cache" call bis_fnc_getParamValue) > 0) then {

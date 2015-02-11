@@ -11,7 +11,7 @@ _time = time;
 for "_i" from 0 to (count _locs)-1 step 1 do {
 	waitUntil {time >= (_time + _i)};
 	[_bomb, _locs select _i, 180, EAST] call NTA_fnc_vehicles_create;
-	if(_target == "Airfied") then {
+	if(_target == "Airfield") then {
 		"BWplus_Crater" createVehicle (_locs select _i);
 	};
 };

@@ -7,27 +7,45 @@ fnc_getout = {
 publicVariable "fnc_getout";
 
 _this spawn {
-	private ["_dir", "_count", "_chute", "_infgrp", "_veh", "_chutepos", "_survivor"];
-
 	_veh 		= _this select 0;
 	_infgrp 	= _this select 1;
 	_players 	= _this select 2;
 	_chutepos 	= _this select 3;
 	_survivor 	= [_this, 4, count (units _infgrp)] call bis_fnc_param;
+	_door 		= "door_rear_source";
+
+	waituntil {alive _veh && {speed _veh > 50}};
 
 
+	if (typeof _veh == "sab_C130_JE") then {
+		_door = "door_2_1";
+	};
 
-	waituntil {_veh distance (_chutepos) <= 2000};
-	_veh setVariable [IL_varname, true, true];
 	{
 		_x setvariable ["inParaCargo", true, true];
 	} forEach (units _infgrp) + _players;
 
-	waituntil {_veh distance (_chutepos) <= 1500};
-	_veh animate ["door_2_1", 1];
+	[_veh, _chutepos] spawn {
+		_veh = _this select 0;
+		_chutepos = _this select 1;
+		while {true} do {
+			hintsilent format ["%1", ((_veh distance [_chutepos select 0, _chutepos select 1, 180]) / (speed _veh) * 3.6)];
+			sleep 1;
+		};
+	};
 
-	waituntil {_veh distance (_chutepos) <= 650};
-	_veh setVariable ["IL_timestamp",time,true];
+
+	waituntil {((_veh distance [_chutepos select 0, _chutepos select 1, 180]) / (speed _veh) * 3.6) <= 60};
+	_veh setVariable [IL_varname, true, true];
+
+	waituntil {((_veh distance [_chutepos select 0, _chutepos select 1, 180]) / (speed _veh) * 3.6) <= 30};
+
+
+	_veh animatedoor [_door, 1];
+
+
+	waituntil {((_veh distance [_chutepos select 0, _chutepos select 1, 180]) / (speed _veh) * 3.6) <= 10};
+	_veh setVariable ["IL_timestamp", time, true];
 	_veh setvariable ['IL_override', [[[0,-0.5,-2],IL_c_green,[0.3,0,0,500],50]],true];
 
 	//_dir = (direction _veh) + 180;
@@ -49,7 +67,8 @@ _this spawn {
 				unassignVehicle _u;
 			} else {
 				_time = time;
-				waituntil {_u getvariable ["parajump", false] || time >= (_time + 90)};
+				waituntil {_u getvariable ["parajump", false] || {time >= (_time + 90)} || {!alive _u}};
+				if (!alive _u) exitwith {};
 				_u allowDamage false;
 				if !(_u getvariable ["parajump", false]) then {
 					moveOut _u;

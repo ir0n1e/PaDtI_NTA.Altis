@@ -27,7 +27,7 @@ if (!isserver) exitwith {};
 	};
 
 
-	waituntil {({_x distance damtrigger > 500} count playableunits) > 0 };
+	waituntil {({_x distance damtrigger < 500} count playableunits) == 0};
 
 	{
 		deletevehicle _x;

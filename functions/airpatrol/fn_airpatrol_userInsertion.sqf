@@ -78,5 +78,5 @@ _this spawn {
 
 	["AP User", -(_tickets)] call NTA_fnc_core_addTickets;
 
-	[[[ATM_Jump_clickpos, 3500, _dir] call BIS_fnc_relPos, [1637.84, 13848.8, 0], ATM_Jump_clickpos, [_chopper], side _player, true, _player], "NTA_fnc_airpatrol_Create", false, false] call bis_fnc_mp;
+	[[[ATM_Jump_clickpos, 3500, _dir] call BIS_fnc_relPos, [1637.84, 13848.8, 0], ATM_Jump_clickpos, [_chopper], side _player, _player], "NTA_fnc_airpatrol_Create", false, false] call bis_fnc_mp;
 };

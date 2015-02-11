@@ -9,8 +9,8 @@ if (isserver) then {
 	"Airpatrol switching to Server" call NTA_fnc_log;
 };
 
-
-private ["_count", "_startPos", "_endPos", "_grp", "_targetPos", "_target", "_picture", "_type", "_types", "_spawnPos", "_spawnDistance", "_spawnHeight", "_NTA_Airpatrol_Veh","_NTA_Airpatrol_Crew", "_NTA_Airpatrol_Task", "_briefing", "_grpOld", "_heli", "_dir", "_apUserInsert", "_apinsertTroops", "_apUser","_flyInHeight","_counter"];
+str [_this, count _this] call nta_fnc_log;
+private ["_count", "_startPos", "_endPos", "_grp", "_targetPos", "_target", "_picture", "_type", "_types", "_spawnPos", "_spawnDistance", "_spawnHeight", "_NTA_Airpatrol_Veh","_NTA_Airpatrol_Crew", "_NTA_Airpatrol_Task", "_briefing", "_grpOld", "_heli", "_dir", "_apUserInsert", "_apinsertTroops", "_apUser", "_flyInHeight", "_counter", "_apParaVars", "_apParaDrop"];
 
 _startPos 		= _this select 0;
 _endPos 		= _this select 1;
@@ -19,15 +19,25 @@ _types			= _this select 3;
 _side			= _this select 4;
 _apUserInsert 	= false;
 _apInsertTroops = false;
-_apUser			= "";
+
+_apParaDrop		= false;
+_apParaVars		= [];
 _flyIngHeight	= 50;
 
 if (count _this >= 6) then {
-	_apUserInsert = _this select 5;
+	_apUserInsert = true;
+	_apUser = _this select 5;
+	if (isnil "_apUser") then {
+		_apUserInsert = false;
+		_apUser		  = objnull;
+	};
 };
 
 if (count _this >= 7) then {
-	_apUser = _this select 6;
+	_apParaDrop 	= true;
+	_apUserInsert 	= false;
+	_apParaVars 	= _this select 6;
+	//[_height, _count, _troopcount, _survivors]
 };
 
 format ["airpatrol %1", _this] call nta_fnc_log;
@@ -37,7 +47,8 @@ waituntil {NTA_Airpatrolrunning};
 if (isnil "_side") then {
 	_side = [WEST, EAST] call NTA_fnc_getRandArrayPos;
 };
-if (!_apUserInsert) then {
+
+if (!_apUserInsert || {!_apParaDrop}) then {
 	if ((NTA_airpatrolCache getvariable [format ["NTA_Airpatrol_CAS_%1", _side], false] || {NTA_airpatrolCache getvariable [format ["NTA_Airpatrol_Serverside_%1", _side], false]}) && {!_apUserInsert}) exitwith {
 		NTA_airpatrolCache setvariable [format ["NTA_Airpatrol_Serverside_%1", _side], false];
 		format ["Airpatrol %1 online exiting", _side] call NTA_fnc_log;
@@ -55,6 +66,7 @@ if (!_apUserInsert) then {
 		NTA_airpatrolCache setvariable [format ["NTA_Airpatrol_Serverside_%1", _side], true];
 	};
 };
+
 //Random types
 if (count _types <= 0) then {
 	_type = call compile format ["NTA_Airpatrol_%1 call NTA_fnc_getRandArrayPos;", _side];
@@ -103,7 +115,7 @@ _count 				= 2;
 _tickets 			= 0;
 _dir				= 200;
 
-if (_type == "B_Plane_CAS_01_F" || {_type == "O_Plane_CAS_02_F"}) then {
+if (_type iskindof "plane") then {
 	_spawnHeight 	= 600;
 	_count 			= 1;
 };
@@ -114,6 +126,13 @@ if (_apUserInsert) then {
 	_flyIngHeight	= 35;
 	_endPos = [_targetPos, 3000, random 360 ] call BIS_fnc_relPos;
 };
+
+if (_apParaDrop) then {
+	_count 			= _apParaVars select 1;
+	_flyIngHeight	= _apParaVars select 0;
+	_endPos = [_targetPos, 5000, random 360 ] call BIS_fnc_relPos;
+};
+
 
 _spawnPos 	= [_startPos select 0, _startPos select 1, _spawnHeight];
 _grp 		= creategroup _side;
@@ -176,7 +195,7 @@ for "_counter" from 1 to _count step 1 do {
 
 	_NTA_Airpatrol_Veh pushback _Heli;
 
-	if (!_apinsertTroops && {!_apUserInsert}) then {
+	if (!_apinsertTroops && {!_apUserInsert} && {!_apParaDrop}) then {
 		{
 			[_x] joinsilent _grp;
 		} foreach units group _Heli;
@@ -186,14 +205,14 @@ for "_counter" from 1 to _count step 1 do {
 	_spawnPos 	= getpos _heli;
 	_dir 		= getdir _heli;
 
-	if (_heli iskindof "Helicopter") then {
+	if (typeof _heli iskindof "Helicopter") then {
 		_heli setvariable ["NTA_Tickets", 60, true];
 		if (_side == WEST) then {
 			_heli call NTA_fnc_crate_Ghost;
 		};
 	};
 
-	if (_heli iskindof "Plane") then {
+	if (typeof _heli iskindof "Plane") then {
 		_heli setvariable ["NTA_Tickets", 80, true];
 	};
 
@@ -221,16 +240,19 @@ if (_side == WEST) then {
 };
 
 //fire it up
-if (_apinsertTroops || {_apUserInsert}) then {
-	[_NTA_Airpatrol_Veh, _targetPos, _apUserInsert, _apUser] call NTA_fnc_airpatrol_insertTroops;
-	NTA_airpatrolCache setvariable [format ["NTA_Airpatrol_Serverside_%1", _side], false];
 
-	if (_apUserInsert) then {
-		// [[_NTA_Airpatrol_Task, _NTA_Airpatrol_Veh, _NTA_Airpatrol_Crew, _briefing, _tickets], "NTA_fnc_airpatrol_task", false, false] call bis_fnc_mp;
+switch (true) do {
+    case (_apParaDrop): {
+    	[_NTA_Airpatrol_Veh, _startPos, _targetPos, _apUser, _apParaVars] call NTA_fnc_airpatrol_insertParaTroops;
+    };
+    case (_apinsertTroops || {_apUserInsert}): {
+    	[_NTA_Airpatrol_Veh, _targetPos, _apUserInsert, _apUser] call NTA_fnc_airpatrol_insertTroops;
+		NTA_airpatrolCache setvariable [format ["NTA_Airpatrol_Serverside_%1", _side], false];
 	};
-} else {
-	[_grp, _startPos, _endPos, _targetPos] call NTA_fnc_airpatrol_addwaypoints;
-	[[_NTA_Airpatrol_Task, _NTA_Airpatrol_Veh, _NTA_Airpatrol_Crew, _briefing, _tickets], "NTA_fnc_airpatrol_task", false, false] call bis_fnc_mp;
+    default {
+     	[_grp, _startPos, _endPos, _targetPos] call NTA_fnc_airpatrol_addwaypoints;
+		[[_NTA_Airpatrol_Task, _NTA_Airpatrol_Veh, _NTA_Airpatrol_Crew, _briefing, _tickets], "NTA_fnc_airpatrol_task", false, false] call bis_fnc_mp;
+    };
 };
 
 format["AIRPATROL: %1 Target: %2 - CREATE", _NTA_Airpatrol_Veh, _target] call NTA_fnc_log;

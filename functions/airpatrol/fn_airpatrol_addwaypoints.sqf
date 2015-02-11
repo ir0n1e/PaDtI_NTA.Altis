@@ -41,14 +41,16 @@ NTA_Airpatrol_switchwp = {
 		"sad west" call nta_fnc_log;
 		_random = SADTIME + (random RANDOMTIME);
 		{
-			(vehicle _x) setvariable ["airpatrol_mission", "Attacking", true]
+			(vehicle _x) setvariable ["airpatrol_mission", "Attacking", true];
+			_x setCombatMode "RED";
 		} foreach units _grp;
 	};
 
 	if (NTA_airpatrolCache getvariable["NTA_Airpatrol_Serverside_East", false] || {NTA_airpatrolCache getvariable["NTA_Airpatrol_CAS_West", false]}) then {
 		_random = SADTIME + (random RANDOMTIME);
 		{
-			(vehicle _x) setvariable ["airpatrol_mission", "Attacking", true]
+			(vehicle _x) setvariable ["airpatrol_mission", "Attacking", true];
+			_x setCombatMode "RED";
 		} foreach units _grp;
 	};
 
