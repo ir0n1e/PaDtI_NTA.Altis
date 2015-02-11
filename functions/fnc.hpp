@@ -159,27 +159,28 @@
 	class Airpatrol {
 		file = "functions\airpatrol";
 		class airpatrol_addwaypoints;
+		class airpatrol_agmAddaction;
+		class airpatrol_agmOpenChopperMenu;
+		class airpatrol_agmOpenInsertMenu;
 		class airpatrol_bombs;
+		class airpatrol_callCAS;
+		class airpatrol_callCAScondition;
 		class airpatrol_callCsatPlane;
 		class airpatrol_callGroup;
 		class airpatrol_callRandom;
 		class airpatrol_combatInsertion;
 		class airpatrol_Create;
-		class airpatrol_init;
-		class airpatrol_insertTroops;
-		class airpatrol_insertParaTroops;
 		class airpatrol_debug;
-		class airpatrol_agmAddaction;
+		class airpatrol_init;
+		class airpatrol_insertParaTroops;
+		class airpatrol_insertTroops;
 		class airpatrol_movegroupHome;
 		class airpatrol_movehomeCondition;
-		class airpatrol_callCAScondition;
-		class airpatrol_callCAS;
-		class airpatrol_userInsertion;
-		class airpatrol_agmOpenInsertMenu;
-		class airpatrol_agmOpenChopperMenu;
-		class airpatrol_userInsertCam;
 		class airpatrol_movein;
+		class airpatrol_ParaDrop;
 		class airpatrol_task;
+		class airpatrol_userInsertCam;
+		class airpatrol_userInsertion;
 	};
 	class Base {
 		file = "functions\Base";
