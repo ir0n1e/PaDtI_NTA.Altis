@@ -19,7 +19,7 @@ IL_action 			= -1;
 
 IL_lastchange 		= 0;
 
-IL_Debug 			= true; 			//Enable Debug Mode
+IL_Debug 			= false; 			//Enable Debug Mode
 IL_Balls 			= false; 			//Show the attach points (requires Debug mode)
 IL_Crew_Only 		= true; 		//Only allow Pilot/Driver/Co-Pilot/Gunner/Commander (does not include left & right gunners for choppers) to change the light
 IL_Red_On_Always 	= false; 	//When true, when light is turned off then on the light will be reset to red else it will never be reset if false
