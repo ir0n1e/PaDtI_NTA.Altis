@@ -64,7 +64,7 @@ _this spawn {
 	openMap false;
 
 	{
-		if (isplayer _x) then {
+		if (isplayer _x && {!NTA_airpatrol_DEBUG}) then {
 			["", "NTA_fnc_airpatrol_UserInsertCam", _x, false] call bis_fnc_mp;
 		};
 	} foreach _apusers;

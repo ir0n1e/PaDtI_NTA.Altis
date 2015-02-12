@@ -22,8 +22,6 @@
 	Note:
 	For Userinsertion name an object 'NTA_Airpatrol_UserInsertion_Obj'
 */
-// start [28713.2,27432.7,0]
-// end [1637.84,13848.8,0]
 
 #define DELETE_TIME 	1800
 #define WAIT_TIME 		1800
@@ -35,8 +33,15 @@
 if (!isserver) exitwith {};
 "Starting Airpatrol Init" call NTA_fnc_log;
 
-NTA_airpatrol_DEBUG = false;
+NTA_airpatrolParaMinHeight 	= 150;
+NTA_Airpatrol_removeItems 	= true;
+NTA_airpatrol_Parachute		= "B_Parachute";
+NTA_airpatrol_DEBUG 		= false;
+
+publicVariable "NTA_airpatrolParaMinHeight";
+publicVariable "NTA_Airpatrol_removeItems";
 publicVariable "NTA_airpatrol_DEBUG";
+publicvariable "NTA_airpatrol_Parachute";
 
 NTA_Airpatrol_WEST = [
 	"B_Heli_Transport_01_camo_F",
@@ -51,8 +56,7 @@ NTA_Airpatrol_Insert_West = [
 ];
 
 NTA_Airpatrol_Para_West = [
-	"B_Heli_Transport_03_F"
-
+	"sab_C130_JE"
 ];
 
 NTA_Airpatrol_EAST = [
@@ -84,11 +88,6 @@ if (NTA_Airpatrol_Debug) then {
 	NTA_airpatrolTarget setmarkerAlpha 1;
 };
 
-NTA_Airpatrolrunning = true;
-publicVariable "NTA_Airpatrolrunning";
-NTA_airpatrolParaMinHeight = 150;
-publicVariable "NTA_airpatrolParaMinHeight";
-
 NTA_csatplaneInbound = false;
 publicVariable "NTA_csatplaneInbound";
 
@@ -111,6 +110,9 @@ if (USERINSERTION && {!isnil "NTA_Airpatrol_UserInsertion_Obj"}) then {
 if (_this select 0 == 0 && {_this select 1 == 0} && {_this select 2 == 0}) exitwith {
 	"NO Airpatrol loop" call NTA_fnc_log;
 };
+
+NTA_Airpatrolrunning = true;
+publicVariable "NTA_Airpatrolrunning";
 
 _this spawn {
 

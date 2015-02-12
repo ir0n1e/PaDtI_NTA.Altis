@@ -80,6 +80,9 @@ _il_config = [
 	[["c130J_base"], false, [
 		 [ [0,6,-2], IL_c_red, IL_attenuation, IL_intensity ]
 	],true],
+	[["sab_C130_J_Base"], false, [
+		 [ [0,6,-2], IL_c_red, IL_attenuation, IL_intensity ]
+	],true],
 	[["kyo_MH47E_base"], false, [
 		 [ [0,2,-0.07], IL_c_red, IL_attenuation, IL_intensity ]
 	],true],

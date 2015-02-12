@@ -10,7 +10,7 @@ if (hasInterface) then {
     	_text = "A I R P A T R O L  |  U S E R I N S E R T I O N";
 	    titleText [_text, "BLACK OUT", 3];
 		0 fadesound 0;
-		sleep 10;
+		sleep 15;
 
 		titleText ["B Y   I r 0 n 1 E   N T A", "BLACK IN", 20];
 		10 fadesound 0.9;

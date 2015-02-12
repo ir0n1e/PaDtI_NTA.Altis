@@ -19,6 +19,7 @@ _lightamount 	= (call IL_fnc_config select _index) select 4;
 _lights 		=+ (call IL_fnc_config select _index) select 2;
 _lighter 		= _lights select 0;
 
+if (_index == -1) exitwith {};
 
 if (isNil {_veh getVariable 'IL_override'}) then {
 	_lighter set [1, IL_c_green];

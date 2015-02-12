@@ -43,7 +43,7 @@ _actions = [format ["ParaDrop Menu - %1 Units", count apinsertgroupall], "Do It 
 		_actions = [_actions, "----------------", "", ""] call AGM_Interaction_fnc_AddSelectableItem;
 
 	};
-} foreach NTA_Airpatrol_Para_West;
+} foreach NTA_Airpatrol_Para_West + NTA_Airpatrol_Insert_West;
 /*
 if (_grpCount < 3) then {
 	_actions = [

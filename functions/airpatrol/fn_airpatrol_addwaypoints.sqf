@@ -1,4 +1,3 @@
-scriptName "fn_airpatrol_addwaypoints";
 /*
 	Author: Ir0n1E
 

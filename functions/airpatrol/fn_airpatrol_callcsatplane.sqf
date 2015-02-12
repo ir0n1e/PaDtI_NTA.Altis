@@ -10,6 +10,7 @@
     Returns:
     ARRAY - [Plane0, Plane1]
 */
+
 #define PLANE_TYPE      "O_Plane_CAS_02_F"
 #define SPAWN_DISTANCE  150
 #define SPAWN_HEIGHT    1200

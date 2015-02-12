@@ -141,7 +141,7 @@ if (_veh getvariable ["IL_Crew_Only", IL_Crew_Only]) then {
 	_show = (_show && {_player == driver _veh || {_player == gunner _veh} || {_player == commander _veh} || {_player in (_veh call IL_fnc_returnTurretUnits)}});
 };
 
-if (_veh getVariable ["IL_Action_Night", IL_Action_Night] && {sunOrMoon == 1 || overcast < 0.7}) then {
+if (_veh getVariable ["IL_Action_Night", IL_Action_Night] && {sunOrMoon == 1 || overcast > 0.7}) then {
 	_show = (_show && {_veh getVariable ["interiorlight", false]});
 };
 

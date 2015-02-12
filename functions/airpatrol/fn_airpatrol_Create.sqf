@@ -1,3 +1,40 @@
+/*
+	Author: Ir0n1E
+
+	Description:
+	Airpatrol Main Function
+
+	Parameter(s):
+	#0 ARRAY  - Startposition / Vehicle Spawn Position
+	#1 ARRAY  - Startposition / Vehicle Spawn Position
+	#2 ARRAY  - Targetposition / Action Position
+	#3 ARRAY  - Vehicle Classnames
+	#4 OBJECT - Side
+	#5 OBJECT - Player for UserInsertion (Optional)
+	#7 ARRAY  - ParaDrop Variables (only for ParaDrop)
+		#0 NUMBER - Height / Vehicle Flyingheight
+		#1 NUMBER - Vehicle Count
+		#2 NUMBER - Count of AI Units (empty cargo positions max)
+		#3 NUMBER - Count of AI Survivurs
+
+	Returns:
+	ARRAY - [Vehicle Group, [Vehicles], [Vehicle Crew]]
+
+	Note:
+	Call UserInsertion via 'NTA_Airpatrol_UserInsertion_Obj' only!
+	Use fn_airpatrol_callGroup to call an Insertion Group!
+
+	Examples:
+	[[22254.2,20295.1,0.00145817], [0,0,0], getmarkerpos "west_1", ["B_Heli_Transport_03_F"],west,nil, [180,2,2,2]] call nta_fnc_airpatrol_create;
+	Calls an AI paradrop at "west_1"
+
+	[[22254.2,20295.1,0.00145817], [0,0,0], [], [], EAST] call NTA_fnc_airpatrol_Create;
+	Calls a random EAST vehicle
+
+	[[22254.2,20295.1,0.00145817], [0,0,0], [], []] call NTA_fnc_airpatrol_Create;
+	Calls a random vehicle
+*/
+
 if (isserver) then {
 
 	if (!isnil "HCPresent") exitwith {
@@ -9,7 +46,6 @@ if (isserver) then {
 	"Airpatrol switching to Server" call NTA_fnc_log;
 };
 
-str [_this, count _this] call nta_fnc_log;
 private ["_count", "_startPos", "_endPos", "_grp", "_targetPos", "_target", "_picture", "_type", "_types", "_spawnPos", "_spawnDistance", "_spawnHeight", "_NTA_Airpatrol_Veh","_NTA_Airpatrol_Crew", "_NTA_Airpatrol_Task", "_briefing", "_grpOld", "_heli", "_dir", "_apUserInsert", "_apinsertTroops", "_apUser", "_flyInHeight", "_counter", "_apParaVars", "_apParaDrop"];
 
 _startPos 		= _this select 0;
@@ -113,7 +149,7 @@ _picture 			= format ["<img size='3' color='#ffffff' image='%1'/>", getText (con
 _spawnHeight 		= 100;
 _count 				= 2;
 _tickets 			= 0;
-_dir				= 200;
+_dir				= [_startPos, _targetPos] call BIS_fnc_dirTo;
 
 if (_type iskindof "plane") then {
 	_spawnHeight 	= 600;
@@ -130,7 +166,8 @@ if (_apUserInsert) then {
 if (_apParaDrop) then {
 	_count 			= _apParaVars select 1;
 	_flyIngHeight	= _apParaVars select 0;
-	_endPos = [_targetPos, 5000, random 360 ] call BIS_fnc_relPos;
+	_endPos 		= [_targetPos, 5000, random 360 ] call BIS_fnc_relPos;
+	_spawnDistance	= 300;
 };
 
 
@@ -141,7 +178,7 @@ _grp setgroupID [format ["AP_" + _NTA_Airpatrol_Task]];
 
 //create units
 for "_counter" from 1 to _count step 1 do {
-	_heli = [_type, ([_spawnPos, _spawnDistance , (_dir - 90)] call BIS_fnc_relPos), 200, _side, "FLY"] call NTA_fnc_vehicles_create;
+	_heli = [_type, ([_spawnPos, _spawnDistance , (_dir - 90)] call BIS_fnc_relPos), _dir, _side, "FLY"] call NTA_fnc_vehicles_create;
 
 	_grpOld = group _heli;
 
@@ -159,6 +196,7 @@ for "_counter" from 1 to _count step 1 do {
 	} foreach units group _Heli;
 	_heli removeAllEventHandlers "Killed";
 	_heli removeAllEventHandlers "Engine";
+	str [_dir, getdir _heli] call NTA_fnc_log;
 	//Add killed EH
 	_heli addeventhandler ["Killed", {
 	 	(_this select 0) spawn {
@@ -215,7 +253,7 @@ for "_counter" from 1 to _count step 1 do {
 	if (typeof _heli iskindof "Plane") then {
 		_heli setvariable ["NTA_Tickets", 80, true];
 	};
-
+	_heli setVariable ["IL_Action_Night", false, true];
 	_heli setvariable ["Airpatrol_Mission", "FlyingIn"];
 	_heli setvariable ["Airpatrol_Target", _targetPos, true];
 	_heli setvariable ["Airpatrol_EndPos", _endPos, true];

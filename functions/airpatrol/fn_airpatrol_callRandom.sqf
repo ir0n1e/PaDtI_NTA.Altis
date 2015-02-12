@@ -1,9 +1,8 @@
-scriptName "fn_callRandom";
 /*
 	Author: Ir0n1E
 
 	Description:
-	Describe your function
+	Calls a random Group (EAST)
 
 	Parameter(s):
 	#0 OBJECT - Target
@@ -45,4 +44,3 @@ switch (floor (random 3)) do {
      	true
     };
 };
-

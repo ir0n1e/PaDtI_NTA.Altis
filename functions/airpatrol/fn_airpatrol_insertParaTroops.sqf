@@ -1,9 +1,9 @@
-private ["_wp", "_vehicles", "_startPos", "_targetPos", "_apUser", "_apParaVars", "_height", "_troopCount", "_survivors", "_side", "_users", "_aiGrps", "_speed", "_man", "_dir", "_infgrp"];
+private ["_wp", "_vehicles", "_startPos", "_targetPos", "_apUser", "_apParaVars", "_height", "_troopCount", "_survivors", "_side", "_users", "_aiGrps", "_speed", "_man", "_dir", "_infgrp", "_parachute"];
 
 _vehicles 	= _this select 0;
 _startPos	= _this select 1;
 _targetPos 	= _this select 2;
-_apUser 	= _this select 3;
+_apUser 	= [_this, 3, objnull] call bis_fnc_param;
 _apParaVars	= _this select 4;
 
 _height		= _apParaVars select 0;
@@ -15,7 +15,7 @@ _users 		= [];
 _aiGrps		= [];
 _speed 		= "FULL";
 _man  		= "B_soldier_PG_F";
-
+_parachute	= _apUser getvariable ["Airpatrol_ParaChute", NTA_airpatrol_Parachute];
 
 for "_i" from 0 to (count _vehicles) -1 do {
 
@@ -27,10 +27,10 @@ for "_i" from 0 to (count _vehicles) -1 do {
 
 	(_vehicles select _i) flyInHeight (_height max NTA_airpatrolParaMinHeight);
 
-	_wp = [group (_vehicles select _i), '', _startPos, "FULL", "MOVE", "CARELESS", "BLUE"] call NTA_fnc_vehicles_addwaypoint;
-	_wp setWaypointCompletionRadius 200;
+	_wp = [group (_vehicles select _i), '', [_startPos, 3500, (_dir + 180)] call BIS_fnc_relPos, "FULL", "MOVE", "CARELESS", "BLUE"] call NTA_fnc_vehicles_addwaypoint;
+	_wp setWaypointCompletionRadius 1000;
 
-	_wp = [group (_vehicles select _i), '', [_targetPos, 4000, _dir] call BIS_fnc_relPos, _speed, "MOVE", "CARELESS", "BLUE"] call NTA_fnc_vehicles_addwaypoint;
+	_wp = [group (_vehicles select _i), '', [_targetPos, 2500, _dir] call BIS_fnc_relPos, _speed, "MOVE", "CARELESS", "BLUE"] call NTA_fnc_vehicles_addwaypoint;
 	_wp setWaypointCompletionRadius 200;
 
 	_wp =[group (_vehicles select _i), '', _targetPos, _speed, "MOVE", "CARELESS", "BLUE"] call NTA_fnc_vehicles_addwaypoint;
@@ -43,7 +43,7 @@ for "_i" from 0 to (count _vehicles) -1 do {
 	_wp setWaypointCompletionRadius 200;
 
 	if (!isnull _apUser) then {
-		_users = (_apUser getvariable [format ["insert%1", group _apUser],[[_apuser]]]) select 0;
+		_users = (_apUser getvariable [format ["insert%1", group _apUser],[[]]]) select 0;
 	};
 
 	_seats 	= getNumber (configfile >> "CfgVehicles" >> typeof (_vehicles select _i) >> "transportsoldier");
@@ -60,13 +60,12 @@ for "_i" from 0 to (count _vehicles) -1 do {
 	{
 		[[_x, _vehicles select _i, _foreachIndex + 1], "NTA_fnc_airpatrol_movein", _x] call bis_fnc_mp;
 		removeBackpackGlobal _x;
-		_x addBackpackGlobal "B_Parachute";
+		_x addBackpackGlobal _parachute;
 	} foreach _users + (units _infgrp);
 
 	//_infWP = AIRFIELD_Markers select (floor(random(count AIRFIELD_Markers)));
 	//[_infgrp,'',getmarkerpos "city","LIMITED","SAD","SAFE","RED"] call NTA_fnc_vehicles_addwaypoint;
 	[(_vehicles select _i), _infgrp, _users, _targetPos, _survivors, _height] call NTA_fnc_airpatrol_ParaDrop;
-
 };
 
 NTA_airpatrolCache setVariable [format ["NTA_Airpatrol_ParaGrp_%1", _side], _aiGrps, true];

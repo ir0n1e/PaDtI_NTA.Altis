@@ -1,4 +1,3 @@
-scriptName "fn_airpatrol_callGroup";
 /*
 	Author: Ir0n1E
 
