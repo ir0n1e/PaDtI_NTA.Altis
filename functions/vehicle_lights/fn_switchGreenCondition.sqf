@@ -30,7 +30,7 @@ if (_veh != _player && {_index > -1}) then {
 	_show = (_index > -1 && {(call IL_fnc_config select _index) select 3});
 };
 
-if (IL_Crew_Only) then {
+if (_veh getvariable ["IL_Crew_Only", IL_Crew_Only]) then {
 	_show = (_show && {_player == driver _veh || {_player == gunner _veh} || {_player == commander _veh} || {_player in (_veh call IL_fnc_returnTurretUnits)}});
 };
 

@@ -39,7 +39,7 @@ if ( (_veh != _player) ) then {
 				};
 			} else {
 				_lights = (call IL_fnc_config select _i) select 2;
-				_timestamp = _veh getVariable ['IL_timestamp',IL_lastchange];
+				_timestamp = _veh getVariable ['IL_timestamp', IL_lastchange];
 
 				if (count IL_lights == 0) then {
 
@@ -49,7 +49,7 @@ if ( (_veh != _player) ) then {
 
 					{
 						_light = '#lightpoint' createVehicleLocal [0,0,0];
-						_light attachTo [_veh,(_x select 0)];
+						_light attachTo [_veh, (_x select 0)];
 						_light setLightColor (_x select 1);
 						_light setLightAttenuation (_x select 2);
 						_light setLightIntensity (_x select 3) * IL_intensity_mult;
@@ -59,11 +59,11 @@ if ( (_veh != _player) ) then {
 							if (isNil {_veh getVariable 'il_balls'}) then {
 								_ball = 'Sign_Sphere10cm_F' createVehicle [0,0,0];
 								_ball attachTo [_veh,(_x select 0)];
-								_veh setVariable ['il_balls',[_ball],true];
+								_veh setVariable ['il_balls', [_ball], true];
 							} else {
 								_ball = 'Sign_Sphere10cm_F' createVehicle [0,0,0];
 								_ball attachTo [_veh,(_x select 0)];
-								_veh setVariable ['il_balls',(_veh getVariable 'il_balls') + [_ball],true];
+								_veh setVariable ['il_balls',(_veh getVariable 'il_balls') + [_ball], true];
 							};
 						};
 						IL_lights pushBack _light;
@@ -114,7 +114,7 @@ if ( (_veh != _player) ) then {
 						deleteVehicle _x;
 					} forEach (_veh getVariable 'il_balls');
 
-					_veh setVariable ['il_balls',nil,true];
+					_veh setVariable ['il_balls', nil, true];
 
 					if (IL_Debug) then {
 						_player sideChat format ['removing balls because lights are off %1', str IL_lights];
@@ -137,12 +137,12 @@ if ( (_veh != _player) ) then {
 	};
 };
 
-if (IL_Crew_Only) then {
+if (_veh getvariable ["IL_Crew_Only", IL_Crew_Only]) then {
 	_show = (_show && {_player == driver _veh || {_player == gunner _veh} || {_player == commander _veh} || {_player in (_veh call IL_fnc_returnTurretUnits)}});
 };
 
-if (IL_Action_Night && {sunOrMoon == 1}) then {
-	_show = (_show && {_veh getVariable ["interiorlight",false]});
+if (_veh getVariable ["IL_Action_Night", IL_Action_Night] && {sunOrMoon == 1 || overcast < 0.7}) then {
+	_show = (_show && {_veh getVariable ["interiorlight", false]});
 };
 
 _show
