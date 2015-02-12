@@ -173,7 +173,7 @@ class Mission
 	randomSeed=11588837;
 	class Intel
 	{
-		briefingName="Patrol and Dominate the Island NTA 4.8 PUBLIC";
+		briefingName="Patrol and Dominate the Island NTA 4.9 PUBLIC";
 		overviewText="Mix aus Patrol Ops, Domination und Capture the Island";
 		resistanceWest=0;
 		resistanceEast=1;
