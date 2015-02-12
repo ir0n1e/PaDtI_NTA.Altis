@@ -17,14 +17,9 @@ _this spawn {
 
 	waituntil {alive _veh && {speed _veh > 50}};
 
-
 	if (typeof _veh iskindof "c130J_base") then {
 		_door = "door_2_1";
 	};
-
-	{
-		_x setvariable ["inParaCargo", true, true];
-	} forEach (units _infgrp) + _users;
 /*
 	[_veh, _targetPos] spawn {
 		_veh = _this select 0;
@@ -36,13 +31,13 @@ _this spawn {
 	};
 */
 
-	waituntil {((_veh distance [_targetPos select 0, _targetPos select 1, _height]) / (speed _veh) * 3.6) <= 60};
+	waituntil {!alive _veh || {((_veh distance [_targetPos select 0, _targetPos select 1, _height]) / (speed _veh) * 3.6) <= 60}};
 	[_veh] call IL_fnc_switchOn;
 
-	waituntil {((_veh distance [_targetPos select 0, _targetPos select 1, _height]) / (speed _veh) * 3.6) <= 30};
+	waituntil {!alive _veh || {((_veh distance [_targetPos select 0, _targetPos select 1, _height]) / (speed _veh) * 3.6) <= 30}};
 	_veh animatedoor [_door, 1];
 
-	waituntil {((_veh distance [_targetPos select 0, _targetPos select 1, _height]) / (speed _veh) * 3.6) <= 5};
+	waituntil {!alive _veh || {((_veh distance [_targetPos select 0, _targetPos select 1, _height]) / (speed _veh) * 3.6) <= 5}};
 	[_veh] call IL_fnc_switchGreen;
 
 	//_dir = (direction _veh) + 180;
@@ -63,16 +58,15 @@ _this spawn {
 				unassignVehicle _u;
 			} else {
 				_time = time;
-				waituntil {_u getvariable ["parajump", false] || {time >= (_time + 90)} || {!alive _u}};
-				if (!alive _u) exitwith {};
-				_u allowDamage false;
-				if !(_u getvariable ["parajump", false]) then {
+				waituntil {vehicle _u != _veh || {time >= (_time + 90)} || {!alive _u}};
+				if (!alive _u) exitwith {_u allowDamage true;};
+
+				if (vehicle _u == _veh) then {
 					moveOut _u;
 					unassignVehicle _u;
 				};
 			};
 			_u allowDamage true;
-
 			/*
 			_dir = (getdir _u) + 180;
 			sleep 2;
@@ -95,8 +89,6 @@ _this spawn {
 
 			*/
 			waitUntil {((getpos _u) select 2) <= 1.5 || {!alive _u}};
-			_u setvariable ["parajump", false, true];
-			_u setvariable ["inParaCargo", false, true];
 
 			_item = (assignedItems _u) call nta_fnc_getrandarraypos;
 			if (floor (random 3) == 1) then {
@@ -113,7 +105,7 @@ _this spawn {
 		if (!isplayer _x) then {
 			_count = _count + 1;
 		};
-		systemchat str _count;
+
 		sleep 0.8;
 
 	} forEach _users + (units _infgrp);
