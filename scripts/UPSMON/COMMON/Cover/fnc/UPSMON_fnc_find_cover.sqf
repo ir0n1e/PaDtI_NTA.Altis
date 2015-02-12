@@ -26,8 +26,8 @@ _i = 0;
 If (count _this > 5) then {_i = _this select 5;};
 
 If (_i > 3) exitwith {_units};
-if (isnil "_unitpos") then {
-	_unitpos = getposATL (_units select 0);
+if (count _unitpos < 3) then {
+	_unitpos = getposATL leader (_units select 0);
 };
 
 if (_spawn) then
