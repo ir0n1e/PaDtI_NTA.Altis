@@ -50,6 +50,11 @@ NTA_Airpatrol_Insert_West = [
 	"B_Heli_Transport_03_F"
 ];
 
+NTA_Airpatrol_Para_West = [
+	"B_Heli_Transport_03_F"
+
+];
+
 NTA_Airpatrol_EAST = [
 	"O_Heli_Attack_02_black_F",
 	"O_Plane_CAS_02_F",
@@ -60,6 +65,7 @@ NTA_Airpatrol_EAST = [
 publicVariable "NTA_Airpatrol_EAST";
 publicVariable "NTA_Airpatrol_WEST";
 publicVariable "NTA_Airpatrol_Insert_West";
+publicvariable "NTA_Airpatrol_Para_West";
 
 
 NTA_airpatrolTarget = createmarker ["NTA_AirpatrolTarget", [0, 0, 0]];
@@ -75,11 +81,13 @@ publicVariable "NTA_airpatrolCache";
 
 
 if (NTA_Airpatrol_Debug) then {
-		NTA_airpatrolTarget setmarkerAlpha 1;
+	NTA_airpatrolTarget setmarkerAlpha 1;
 };
 
 NTA_Airpatrolrunning = true;
 publicVariable "NTA_Airpatrolrunning";
+NTA_airpatrolParaMinHeight = 150;
+publicVariable "NTA_airpatrolParaMinHeight";
 
 NTA_csatplaneInbound = false;
 publicVariable "NTA_csatplaneInbound";
@@ -92,6 +100,8 @@ if (USERINSERTION && {!isnil "NTA_Airpatrol_UserInsertion_Obj"}) then {
 	[NTA_Airpatrol_UserInsertion_Obj, "Chopper Insertion", 10, {true}, {
 		(_this select 1) setvariable [format ["insert%1", group (_this select 1)],
 		[]];
+		(_this select 1) setvariable [format ["ParaDrop%1", group (_this select 1)], false];
+		(_this select 1) setvariable [format ["ParaJumpHeight%1", group (_this select 1)], 0];
 		[_this select 1] call NTA_fnc_airpatrol_agmOpenInsertMenu
 		},
 		false

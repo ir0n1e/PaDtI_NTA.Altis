@@ -1,9 +1,15 @@
 if (!(isClass(configFile/"CfgPatches"/"AGM_Interaction"))) exitwith {};
-private ["_actions", "_array", "_picture", "_player"];
+private ["_actions", "_array", "_picture", "_player", "_chopperString"];
 
 _player 	= _this select 0;
 _actions 	= [format ["Insertion %1", (group _player)], "Do It >>"] call AGM_Interaction_fnc_prepareSelectMenu;
+_chopperStr = "Call Chopper";
 Insertarray = [];
+
+if (_player getVariable [format ["ParaDrop%1", group _player], false]) then {
+	_chopperStr = "Call ParaDrop";
+};
+
 
 {
 	if ((_x distance _player) < 10) then {
@@ -25,9 +31,13 @@ Insertarray = [];
 	] call AGM_Interaction_fnc_AddSelectableItem;
 
 } foreach InsertArray;
-{
-	_actions = [_actions, _x, "", [_x, _player]] call AGM_Interaction_fnc_AddSelectableItem;
-} foreach ["","Add All", "Call Chopper"];
+_actions = [_actions, "", "", ""] call AGM_Interaction_fnc_AddSelectableItem;
+_actions = [_actions, "Add All", "", ["Add All", _player]] call AGM_Interaction_fnc_AddSelectableItem;
+_actions = [_actions, "---------------", "", ""] call AGM_Interaction_fnc_AddSelectableItem;
+_actions = [_actions, format ["Para Drop %1", _player getVariable [format ["ParaDrop%1", group _player], false]], "", ["ParaDrop", _player]] call AGM_Interaction_fnc_AddSelectableItem;
+
+_actions = [_actions, _chopperStr, "", ["CallChopper", _player]] call AGM_Interaction_fnc_AddSelectableItem;
+
 [
 	_actions,
 	{
@@ -38,15 +48,24 @@ Insertarray = [];
 			[(_this select 1)] call NTA_fnc_airpatrol_agmOpenInsertMenu;
 		};
 
+		if (str (_this select 0) == str "ParaDrop") exitwith {
+			(_this select 1) setVariable [format ["ParaDrop%1", group (_this select 1)], true];
+			call AGM_Interaction_fnc_hideMenu;
+			[(_this select 1)] call NTA_fnc_airpatrol_agmOpenInsertMenu;
+		};
+
 		_insplayers = (_this select 1) getvariable [format ["insert%1", group (_this select 1)], []];
-		if (str (_this select 0) == str "Call Chopper") then {
+		if (str (_this select 0) == str "CallChopper") then {
 			call AGM_Interaction_fnc_hideMenu;
 
 			if (count _insPlayers > 0) then {
 				(_this select 1) setvariable [format ["insert%1", group (_this select 1)], [_insplayers], true];
-				[(_this select 1)] call NTA_fnc_airpatrol_agmOpenChopperMenu;
+				if !((_this select 1) getVariable [format ["ParaDrop%1", group (_this select 1)], false]) then {
+					[(_this select 1)] call NTA_fnc_airpatrol_agmOpenChopperMenu;
+				} else {
+					[(_this select 1)] call NTA_fnc_airpatrol_agmOpenParaMenu;
+				};
 			} else {
-
 				[(_this select 1)] call NTA_fnc_airpatrol_agmOpenInsertMenu;
 			};
 		} else {
@@ -61,6 +80,7 @@ Insertarray = [];
 		};
 	},
 	{
+		player setVariable [format ["ParaDrop%1", group player], false];
 		call AGM_Interaction_fnc_hideMenu;
 		if !(profileNamespace getVariable ["AGM_Interaction_AutoCloseMenu", false]) then {"Default" call AGM_Interaction_fnc_openMenu};
 

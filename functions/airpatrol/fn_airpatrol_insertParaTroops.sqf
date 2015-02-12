@@ -25,7 +25,7 @@ for "_i" from 0 to (count _vehicles) -1 do {
 
 	_dir = [_targetPos, _startPos] call BIS_fnc_dirTo;
 
-	(_vehicles select _i) flyInHeight (_height max 150);
+	(_vehicles select _i) flyInHeight (_height max NTA_airpatrolParaMinHeight);
 
 	_wp = [group (_vehicles select _i), '', _startPos, "FULL", "MOVE", "CARELESS", "BLUE"] call NTA_fnc_vehicles_addwaypoint;
 	_wp setWaypointCompletionRadius 200;

@@ -181,6 +181,8 @@
 		class airpatrol_task;
 		class airpatrol_userInsertCam;
 		class airpatrol_userInsertion;
+		class airpatrol_agmOpenParaMenu;
+		class airpatrol_agmOpenParaConfMenu;
 	};
 	class Base {
 		file = "functions\Base";

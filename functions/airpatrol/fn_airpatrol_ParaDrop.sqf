@@ -9,9 +9,10 @@ publicVariable "fnc_getout";
 _this spawn {
 	_veh 		= _this select 0;
 	_infgrp 	= _this select 1;
-	_users 	= _this select 2;
+	_users 		= _this select 2;
 	_targetPos 	= _this select 3;
 	_survivors 	= [_this, 4, count (units _infgrp)] call bis_fnc_param;
+	_height		= _this select 5;
 	_door 		= "door_rear_source";
 
 	waituntil {alive _veh && {speed _veh > 50}};
@@ -35,16 +36,13 @@ _this spawn {
 	};
 */
 
-	waituntil {((_veh distance [_targetPos select 0, _targetPos select 1, 180]) / (speed _veh) * 3.6) <= 60};
+	waituntil {((_veh distance [_targetPos select 0, _targetPos select 1, _height]) / (speed _veh) * 3.6) <= 60};
 	[_veh] call IL_fnc_switchOn;
 
-	waituntil {((_veh distance [_targetPos select 0, _targetPos select 1, 180]) / (speed _veh) * 3.6) <= 30};
-
-
+	waituntil {((_veh distance [_targetPos select 0, _targetPos select 1, _height]) / (speed _veh) * 3.6) <= 30};
 	_veh animatedoor [_door, 1];
 
-
-	waituntil {((_veh distance [_targetPos select 0, _targetPos select 1, 180]) / (speed _veh) * 3.6) <= 5};
+	waituntil {((_veh distance [_targetPos select 0, _targetPos select 1, _height]) / (speed _veh) * 3.6) <= 5};
 	[_veh] call IL_fnc_switchGreen;
 
 	//_dir = (direction _veh) + 180;
@@ -52,7 +50,6 @@ _this spawn {
 	_max = (count (units _infgrp)) - (count _users);
 
 	{
-
 		[_x,_count, _survivors, _max] spawn {
 			private ["_u","_c","_s","_m"];
 
