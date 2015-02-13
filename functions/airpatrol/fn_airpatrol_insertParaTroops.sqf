@@ -11,7 +11,6 @@ _troopCount = _apParaVars select 2;
 _survivors	= _apParaVars select 3;
 
 _side		= side (_vehicles select 0);
-_users 		= [];
 _aiGrps		= [];
 _speed 		= "FULL";
 _man  		= "B_soldier_PG_F";
@@ -31,22 +30,23 @@ for "_i" from 0 to (count _vehicles) -1 do {
 	_wp setWaypointCompletionRadius 1000;
 
 	_wp = [group (_vehicles select _i), '', [_targetPos, 2500, _dir] call BIS_fnc_relPos, _speed, "MOVE", "CARELESS", "BLUE"] call NTA_fnc_vehicles_addwaypoint;
-	_wp setWaypointCompletionRadius 200;
+	_wp setWaypointCompletionRadius 500;
 
-	_wp =[group (_vehicles select _i), '', _targetPos, _speed, "MOVE", "CARELESS", "BLUE"] call NTA_fnc_vehicles_addwaypoint;
-	_wp setWaypointCompletionRadius 200;
+	_wp = [group (_vehicles select _i), '', _targetPos, _speed, "MOVE", "CARELESS", "BLUE"] call NTA_fnc_vehicles_addwaypoint;
+	_wp setWaypointCompletionRadius 500;
 
 	_wp = [group (_vehicles select _i), '', [_targetPos, 2000, (_dir + 180)] call BIS_fnc_relPos, _speed, "MOVE", "CARELESS", "BLUE"] call NTA_fnc_vehicles_addwaypoint;
-	_wp setWaypointCompletionRadius 200;
+	_wp setWaypointCompletionRadius 500;
 
 	_wp = [group (_vehicles select _i), '', (_vehicles select _i) getvariable ["Airpatrol_EndPos", [0,0,0]], "FULL", "MOVE", "CARELESS", "BLUE", ["true", "{[_x] call NTA_fnc_vehicles_delete} forEach thislist"]] call NTA_fnc_vehicles_addwaypoint;
-	_wp setWaypointCompletionRadius 200;
+	_wp setWaypointCompletionRadius 500;
 
-	if (!isnull _apUser) then {
+	_users 	= [];
+	if (_i == 0) then {
 		_users = (_apUser getvariable [format ["insert%1", group _apUser],[[]]]) select 0;
 	};
 
-	_seats 	= getNumber (configfile >> "CfgVehicles" >> typeof (_vehicles select _i) >> "transportsoldier");
+	_seats = getNumber (configfile >> "CfgVehicles" >> typeof (_vehicles select _i) >> "transportsoldier") + (count (getarray (configfile >> "CfgVehicles" >> typeof (_vehicles select _i) >> "memoryPointsGetInCargoPrecise")) -1);
 
 	_infgrp = createGroup _side;
 

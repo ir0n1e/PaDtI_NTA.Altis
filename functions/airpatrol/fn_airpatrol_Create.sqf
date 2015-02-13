@@ -6,7 +6,7 @@
 
 	Parameter(s):
 	#0 ARRAY  - Startposition / Vehicle Spawn Position
-	#1 ARRAY  - Startposition / Vehicle Spawn Position
+	#1 ARRAY  - Endposition / Vehicle Delete Position
 	#2 ARRAY  - Targetposition / Action Position
 	#3 ARRAY  - Vehicle Classnames
 	#4 OBJECT - Side
@@ -154,6 +154,7 @@ _dir				= [_startPos, _targetPos] call BIS_fnc_dirTo;
 if (_type iskindof "plane") then {
 	_spawnHeight 	= 600;
 	_count 			= 1;
+	_spawnDistance	= 300;
 };
 
 if (_apUserInsert) then {
@@ -167,7 +168,6 @@ if (_apParaDrop) then {
 	_count 			= _apParaVars select 1;
 	_flyIngHeight	= _apParaVars select 0;
 	_endPos 		= [_targetPos, 5000, random 360 ] call BIS_fnc_relPos;
-	_spawnDistance	= 300;
 };
 
 
