@@ -9,19 +9,33 @@ _this spawn {
 
 	waituntil {alive _veh && {speed _veh > 50}};
 
-	if (typeof _veh iskindof "c130J_base" ||  {typeof _veh iskindof "sab_C130_J_Base"}) then {
-		_door = "door_2_1";
-	};
 
-	waituntil {sleep 10; !alive _veh || {((_veh distance [_targetPos select 0, _targetPos select 1, _height]) / (speed _veh) * 3.6) <= 60}};
+
+	waituntil {!alive _veh || {((_veh distance [_targetPos select 0, _targetPos select 1, _height]) / (speed _veh) * 3.6) <= 60}};
 	[_veh] call IL_fnc_switchOn;
+	//playsound "ap_makeReady";
+	{
+		["ap_getReady","playsound", _x] call BIS_fnc_MP;
+	} foreach _users;
+
 	_veh setvariable ["airpatrol_mission", "ParaDrop", true];
 
 	waituntil {sleep 10; !alive _veh || {((_veh distance [_targetPos select 0, _targetPos select 1, _height]) / (speed _veh) * 3.6) <= 30}};
-	_veh animatedoor [_door, 1];
+
+	if (typeof _veh iskindof "c130J_base" ||  {typeof _veh iskindof "sab_C130_J_Base"}) then {
+		_veh animate ["door_2_1", 1];
+	} else {
+		_veh animatedoor ["door_rear_source", 1];
+	};
 
 	waituntil {!alive _veh || {((_veh distance [_targetPos select 0, _targetPos select 1, _height]) / (speed _veh) * 3.6) <= 5}};
 	[_veh] call IL_fnc_switchGreen;
+	{
+		if (isplayer _x && {vehicle _x == _veh}) then {
+			["ap_gogogo","playsound", _x] call BIS_fnc_MP;
+		};
+	} foreach _users;
+
 
 	//_dir = (direction _veh) + 180;
 	_count = 0;

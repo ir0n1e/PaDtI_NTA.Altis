@@ -101,6 +101,7 @@ if (USERINSERTION && {!isnil "NTA_Airpatrol_UserInsertion_Obj"}) then {
 		[]];
 		(_this select 1) setvariable [format ["ParaDrop%1", group (_this select 1)], false];
 		(_this select 1) setvariable [format ["ParaJumpHeight%1", group (_this select 1)], 0];
+		(_this select 1) setvariable ["Airpatrol_ParaChute", NTA_airpatrol_Parachute, true];
 		[_this select 1] call NTA_fnc_airpatrol_agmOpenInsertMenu
 		},
 		false

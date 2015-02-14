@@ -16,6 +16,7 @@ _speed 		= "FULL";
 _man  		= "B_soldier_PG_F";
 _parachute	= _apUser getvariable ["Airpatrol_ParaChute", NTA_airpatrol_Parachute];
 
+
 for "_i" from 0 to (count _vehicles) -1 do {
 
 	if (typeof (_vehicles select _i) isKindOf "Plane") then {
@@ -24,9 +25,10 @@ for "_i" from 0 to (count _vehicles) -1 do {
 
 	_dir = [_targetPos, _startPos] call BIS_fnc_dirTo;
 
+	_height = _height + (50 * _i);
 	(_vehicles select _i) flyInHeight (_height max NTA_airpatrolParaMinHeight);
 
-	_wp = [group (_vehicles select _i), '', [_startPos, 3500, (_dir + 180)] call BIS_fnc_relPos, "FULL", "MOVE", "CARELESS", "BLUE"] call NTA_fnc_vehicles_addwaypoint;
+	_wp = [group (_vehicles select _i), '', [_startPos, 3500, (_dir + 180)] call BIS_fnc_relPos, _speed, "MOVE", "CARELESS", "BLUE"] call NTA_fnc_vehicles_addwaypoint;
 	_wp setWaypointCompletionRadius 1000;
 
 	_wp = [group (_vehicles select _i), '', [_targetPos, 2500, _dir] call BIS_fnc_relPos, _speed, "MOVE", "CARELESS", "BLUE"] call NTA_fnc_vehicles_addwaypoint;
@@ -60,7 +62,11 @@ for "_i" from 0 to (count _vehicles) -1 do {
 	{
 		[[_x, _vehicles select _i, _foreachIndex + 1], "NTA_fnc_airpatrol_movein", _x] call bis_fnc_mp;
 		removeBackpackGlobal _x;
-		_x addBackpackGlobal _parachute;
+		if (isplayer _x) then {
+			_x addBackpackGlobal _parachute;
+		} else {
+			_x addBackpackGlobal "B_Parachute";
+		};
 	} foreach _users + (units _infgrp);
 
 	//_infWP = AIRFIELD_Markers select (floor(random(count AIRFIELD_Markers)));

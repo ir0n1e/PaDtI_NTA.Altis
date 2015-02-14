@@ -4,7 +4,7 @@ _this spawn {
 	_chopper 		= _this select 0;
 	_apusers		= (_this select 2);
 	_choppercount 	= count (_player getvariable format ["insert%1", group _player]);
-	_seats 			= getNumber (configfile >> "CfgVehicles" >> _chopper >> "transportsoldier") * _chopperCount;
+	_seats 			= (getNumber (configfile >> "CfgVehicles" >> _chopper >> "transportsoldier") + (count (getarray (configfile >> "CfgVehicles" >> _chopper >> "memoryPointsGetInCargoPrecise")) -1)) * _chopperCount;
 	_tickets 		= ((_seats - count _apusers) * 10) + (_choppercount * 20);
 
 	sleep 2;
@@ -76,6 +76,6 @@ _this spawn {
 		[[[Airpatrol_Jump_clickpos, 3500, _dir] call BIS_fnc_relPos, [1637.84, 13848.8, 0], Airpatrol_Jump_clickpos, [_chopper], side _player, _player], "NTA_fnc_airpatrol_Create", false, false] call bis_fnc_mp;
 	} else {
 		_height = NTA_airpatrolParaMinHeight + (_player getvariable [format ["ParaJumpHeight%1", (group _player)], 0]);
-		[[[Airpatrol_Jump_clickpos, 8000, _dir] call BIS_fnc_relPos, [1637.84, 13848.8, 0], Airpatrol_Jump_clickpos, [_chopper], side _player, _player, [_height, 2, 20, 0]], "nta_fnc_airpatrol_create", false, false] call bis_fnc_mp;
+		[[[Airpatrol_Jump_clickpos, 9000, _dir] call BIS_fnc_relPos, [1637.84, 13848.8, 0], Airpatrol_Jump_clickpos, [_chopper], side _player, _player, [_height, 2, _seats, 0]], "nta_fnc_airpatrol_create", false, false] call bis_fnc_mp;
 	};
 };
