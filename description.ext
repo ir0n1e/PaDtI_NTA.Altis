@@ -96,3 +96,22 @@ titles[] = {"NTAImage"};
     	};
 	};
 };
+class CfgSounds {
+  sounds[] = {};
+  class ap_getReady {
+    // how the sound is referred to in the editor (e.g. trigger effects)
+    name = "Airpatrol Get Ready";
+    // filename, volume, pitch
+    sound[] = {"sounds\getready.ogg", 1, 1};
+    // subtitle delay in seconds, subtitle text
+    titles[] = {1, "* Get Ready *"};
+  };
+  class ap_gogogo {
+    // how the sound is referred to in the editor (e.g. trigger effects)
+    name = "Airpatrol GO GO GO";
+    // filename, volume, pitch
+    sound[] = {"sounds\go.ogg", 1, 1};
+    // subtitle delay in seconds, subtitle text
+    titles[] = {1, "* GO GO GO *"};
+  };
+};
