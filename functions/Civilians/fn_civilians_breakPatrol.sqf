@@ -11,7 +11,7 @@ _grp = group _unit;
 
 if ((side _unit) == CIVILIAN && {alive _unit}) then {
 
-    _hostilefactor = _hostilefactor + 0.005;
+    _hostilefactor = _hostilefactor + 0.08;
     server setvariable [format["trig%1_hostilefactor", _mkr], _hostilefactor, true];
 
     _grp setBehaviour "CARELESS";
@@ -28,7 +28,7 @@ if ((side _unit) == CIVILIAN && {_distance <= 30}) then {
     };
 
     _unit setvariable ["personalhostilefactor",
-        (_unit getvariable "personalhostilefactor") + (_hostilefactor * 0.01)];
+        (_unit getvariable "personalhostilefactor") + (_hostilefactor * 0.2)];
 
     if(_unit getvariable "agent") exitwith {
         [_unit, _mkr] call NTA_fnc_civilians_agent;
