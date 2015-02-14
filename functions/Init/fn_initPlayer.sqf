@@ -100,8 +100,8 @@ if (("NRF_Training" call bis_fnc_getParamValue) > 0) then {
 };
 
 if (("NTA_Tickets" call bis_fnc_getParamValue) > 0) then {
-	"MissionEnd" addPublicVariableEventHandler {
-		if (_this select 0) then {
+	"NTA_MissionEnd" addPublicVariableEventHandler {
+		if (_this select 1) then {
 			["epicFail",false,2] call BIS_fnc_endMission;
 		};
 	};
