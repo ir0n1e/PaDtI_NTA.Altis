@@ -181,7 +181,7 @@ _this spawn {
 
 				if (_counter == _bGrps) then {
 
-					0 = [leader _bGroup, _mkr, "SHOWMARKER", "AMBUSH","RANDOM","SPAWNED", "LIMITED"] execVM "scripts\UPSMON.sqf";
+					0 = [leader _bGroup, _mkr, "SHOWMARKER", "AMBUSH", "SPAWNED", "LIMITED"] execVM "scripts\UPSMON.sqf";
 				} else {
 					0 = [leader _bGroup, _mkr, "SHOWMARKER", "SPAWNED", "SAFE", "LIMITED"] execVM "scripts\UPSMON.sqf";
 				};

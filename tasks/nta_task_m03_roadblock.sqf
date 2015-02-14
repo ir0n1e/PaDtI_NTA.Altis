@@ -269,7 +269,7 @@ _group2 = [_markerpos, _side, (configFile >> "CfgGroups" >> "East" >> "OPF_F" >>
 {
 	PO3_TOTAL_UNITS pushBack _x;
 } forEach (units _group2);
-_null=[leader _group2,_marker,"random","ambush","SPAWNED" ] execVM "scripts\UPSMON.sqf";
+_null=[leader _group2,_marker, "ambush", "SPAWNED" ] execVM "scripts\UPSMON.sqf";
 
 
 
@@ -310,7 +310,7 @@ for "_i" from 1 to 4 do {
 	{
 		PO3_TOTAL_UNITS pushBack _x;
 	} forEach (units _grp);
-	_null=[leader _grp,"town","random","delete:",120,"SPAWNED"] execVM "scripts\UPSMON.sqf";
+	_null=[leader _grp,"town","random","SPAWNED"] execVM "scripts\UPSMON.sqf";
 	//_null=[leader _grp,_marker, "prefix:", house, "randomup","max:",10, "showmarker"] execVM "UPS.sqf";
 };
 _marker = createMarker ["town_inner",[20228.5,11676.6,0]];
@@ -324,7 +324,7 @@ for "_i" from 1 to 3 do {
 	{
 		PO3_TOTAL_UNITS pushBack _x;
 	} forEach (units _grp);
-	_null=[leader _grp,_marker,"delete:",120,"random","SPAWNED"] execVM "scripts\UPSMON.sqf";
+	_null=[leader _grp,_marker,"random","SPAWNED"] execVM "scripts\UPSMON.sqf";
 };
 
 _pos = [20102.929688,11755.605469,0.019104];
