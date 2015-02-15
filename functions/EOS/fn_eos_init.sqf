@@ -48,7 +48,7 @@ VictoryColor = "colorGreen";	// Colour of marker after completion
 hostileColor = "colorRed";		// Default colour when enemies active
 bastionColor = "colorOrange";	// Colour for bastion marker
 
-EOShardlimit = 110;
+EOShardlimit = 80;
 EOS_ACTIVE = false;
 EOScounter = 0;
 BOScounter = 0;

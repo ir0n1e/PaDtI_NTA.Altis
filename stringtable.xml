@@ -65,6 +65,14 @@
 			<English>Event Mode</English>
 			<German>Eventmodus</German>
 		</Key>
+		<Key ID="STR_NTA_SMALLGEAR">
+			<English>Small Gear</English>
+			<German>Wenig Ausrüstung</German>
+		</Key>
+		<Key ID="STR_NTA_FULLGEAR">
+			<English>Full Gear</English>
+			<German>Komplette Ausrüstung</German>
+		</Key>
 
 	</Package>
 	<Package name="NTA_Airpatrol">

@@ -161,7 +161,7 @@ _this spawn {
     waituntil {{alive _x} count _arty <= 0};
     [_task, "succeeded"] call SHK_Taskmaster_upd;
 
-    waitUntil {sleep 10; !({_x distance _this > 500} count playableUnits == 0) };
+    waitUntil {sleep 10; {_x distance (_this select 0) < 500} count playableUnits == 0 };
 
     {
     	deleteGroup (group _x);

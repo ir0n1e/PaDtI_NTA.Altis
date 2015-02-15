@@ -46,7 +46,7 @@ class Header {
 
 class Extended_InitPost_EventHandlers {
     class AllVehicles {
-        init="(_this select 0) call NTA_fnc_cleanUp; _this call NTA_fnc_curator_init";
+        init="_this call NTA_fnc_curator_init";
     };
 };
 

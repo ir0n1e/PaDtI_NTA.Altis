@@ -91,6 +91,7 @@ call NTA_fnc_agmlogistics_init;
 call NTA_fnc_vehicles_init;
 call NTA_fnc_players_adminActions;
 call NTA_fnc_base_weapons;
+call NTA_fnc_cleanup;
 
 if (("NTA_Civilians" call bis_fnc_getParamValue) > 0) then {
 	call NTA_fnc_civilians_init;

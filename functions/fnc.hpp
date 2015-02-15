@@ -81,6 +81,10 @@
 		class engineers;
 		class players_modinfo;
 		class players_viewDistance;
+		class players_respawnSwitch;
+		class players_saveGear;
+		class players_loadGear;
+		class players_loadGearSmall;
 	};
 	class Crate {
 		file = "functions\crate";

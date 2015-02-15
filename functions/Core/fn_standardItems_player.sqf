@@ -13,7 +13,7 @@ if !(player getvariable ["haveBWA3", false]) exitwith {
     _this addItem "ItemMap"; _this assignItem "ItemMap";
     _this addItem "ItemCompass"; _this assignItem "ItemCompass";
     _this addItem "ItemWatch"; _this assignItem "ItemWatch";
-    _this addItem "ItemGPS"; _this assignItem "ItemGPS";
+    //_this addItem "ItemGPS"; _this assignItem "ItemGPS";
     _this addItem "NVGoggles_OPFOR";
 };
 
@@ -28,7 +28,7 @@ if ((name _this) == "drei.zehn" && {player getvariable ["haveBWplus", false]}) t
 _this addItem "ItemMap"; _this assignItem "ItemMap";
 _this addItem "ItemCompass"; _this assignItem "ItemCompass";
 _this addItem "ItemWatch"; _this assignItem "ItemWatch";
-_this addItem "ItemGPS"; _this assignItem "ItemGPS";
+//_this addItem "ItemGPS"; _this assignItem "ItemGPS";
 
 if (isClass(configFile/"CfgPatches"/"AGM_NightVision")) then {
     _this addItem "AGM_NVG_Wide";

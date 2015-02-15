@@ -1,3 +1,4 @@
+/*
 if (_this in playableUnits) exitwith {};
 _this addEventHandler ["killed",{
 	(_this select 0) spawn {
@@ -11,3 +12,19 @@ _this addEventHandler ["killed",{
 		};
 	};
 }];
+*/
+
+_this spawn {
+
+	while {true} do {
+		sleep (2*60);
+
+		{
+			_unit = _x;
+
+			if (!(_unit getvariable ["NTA_Airpatrol_Crash", false]) && {!alive _unit} && {!(_unit in call NTA_fnc_all_vehicles)} && {{_x distance _unit < 500} count playableUnits == 0}) then {
+				deletevehicle _unit;
+			};
+		} foreach vehicles + allunits;
+	};
+};

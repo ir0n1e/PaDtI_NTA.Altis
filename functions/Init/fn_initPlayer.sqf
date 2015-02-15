@@ -9,6 +9,7 @@ player setvariable ["haveBWplus", false];
 player setvariable ["haveAGM", false];
 player setvariable ["haveCBA", false];
 respawnMarkers = [];
+Respawn_unitGear = [];
 NTA_MissionEnd = false;
 NTAmedic = ["medic1", "medic2", "medic3", "medic4"];
 publicVariable "NTAmedic";
@@ -35,6 +36,7 @@ player setvariable ["Playerbox", format ["ammo_%1", player], true];
 player setVariable["profileName", name player, true];
 
 [player] spawn NTA_fnc_crate_respawn;
+player call NTA_fnc_standardItems_player;
 if (str player in NTAmedic) then {
 	player setvariable ["AGM_ismedic",true, true];
 };
@@ -49,27 +51,45 @@ if (str player in NTAmedic) then {
 
 player addeventhandler ["killed", {
 	_p = _this select 0;
+	Respawn_unitGear = [_p] call NTA_fnc_players_saveGear;
 	[[_p, primaryWeapon _p], "NTA_fnc_inidb_writePlayerStats", false, false] call bis_fnc_mp;
+
 	{deleteMarkerLocal _x} foreach respawnMarkers;
+
 	m1 = createmarkerlocal ["respawn_west_1", getmarkerpos "west_1"];
 	m1 setMarkerTextLocal localize "STR_NTA_Base";
 	m2 = createmarkerlocal ["respawn_west_2", getmarkerpos "west_2"];
 	m2 setMarkerTextLocal localize "STR_NTA_Hill46";
 	respawnMarkers = [m1, m2];
+	if (leader (group _p) != _p  && {leader (group _p) distance getmarkerpos "west_1" > 1000} && {leader (group _p) distance getmarkerpos "west_2" > 1000} ) then {
+		m3 = createmarkerlocal ["respawn_west_3", [getpos (leader group _p), [5, 10],2,0] call PO3_fnc_getSafePos];
+		m3 setMarkerTextLocal format ["%1 %2", name (leader group _p), localize "STR_NTA_SMALLGEAR"];
+
+		m4 = createmarkerlocal ["respawn_west_4", [getpos (leader group _p), [400, 500],2,0] call PO3_fnc_getSafePos];
+		m4 setMarkerTextLocal format ["%1 %2", name (leader group _p),  localize "STR_NTA_FULLGEAR"];
+		respawnMarkers pushBack m3;
+		respawnMarkers pushBack m4;
+	};
+
 	[_p, (-10)] call NTA_fnc_core_addTickets;
 }];
 
 player addeventhandler ["respawn", {
-	player setvariable ["Playerbox", format ["ammo_%1", player]];
-	[player] call NTA_fnc_crate_respawn;
 
-	if (player getvariable "haveBWA3" && {player getvariable "haveAGM"}) then {
-		[player] call NTA_fnc_players_actions;
+	_p = _this select 0;
+
+	_p setvariable ["Playerbox", format ["ammo_%1", _p]];
+	[_p] call NTA_fnc_crate_respawn;
+
+	if (_p getvariable "haveBWA3" && {_p getvariable "haveAGM"}) then {
+		[_p] call NTA_fnc_players_actions;
 	};
 
-	if (str player in NTAmedic) then {
-		player setvariable ["AGM_ismedic",true, true];
+	if (str _p in NTAmedic) then {
+		_p setvariable ["AGM_ismedic",true, true];
 	};
+
+	[_p, Respawn_unitGear] call NTA_fnc_players_respawnSwitch;
 }];
 
 

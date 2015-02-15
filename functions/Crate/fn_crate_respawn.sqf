@@ -12,5 +12,4 @@ if (_strp == "crew1" or _strp == "crew2" or _strp == "crew3" or _strp == "crew4"
 	_player setVariable ["AGM_GForceCoef", 0.75];
 };
 
-_player call NTA_fnc_standardItems_player;
 [_player] call NTA_fnc_crate_fill;
