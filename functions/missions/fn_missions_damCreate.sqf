@@ -6,23 +6,24 @@ _pipe       = [];
 _pos        = [_this select 0, -20, 90] call BIS_fnc_relPos;
 
 fnc_dam_active = {
-
-    [] spawn {
+    _this spawn {
+        sleep 3;
+        {
+            [_x,currentWaypoint _x, getpos ([getpos _this, 1000, playableunits] call NTA_fnc_core_findnearestobject), 'FULL','SAD','Combat'] call NTA_fnc_vehicles_addwaypoint
+        } foreach (server getvariable ['Dampatrols',[]]);
+        sleep 1;
+        [(server getvariable ["DamHouses", []]) select 0, damactive] call NTA_fnc_spawnFlare;
+        [[server getvariable 'DamLamps', true],'NTA_fnc_lamps_LampSwitch', nil, true] call BIS_fnc_MP;
+        sleep 1;
         _time = time;
         while {time < (_time + 300)} do {
             playSound3D ["A3\Sounds_F\sfx\alarm_opfor.wss", (server getvariable ["DamHouses", []]) select 0];
-            sleep 3;
+            sleep 5;
         };
     };
 
-    [(server getvariable ["DamHouses", []]) select 0, damactive] call NTA_fnc_spawnFlare;
-    [[server getvariable 'DamLamps', true],'NTA_fnc_lamps_LampSwitch', nil, true] call BIS_fnc_MP;
     [EAST,[10892.2,8552.28,0], nil, getpos ([getpos _this, 1000, playableunits] call NTA_fnc_core_findnearestobject),
     ['O_Heli_Light_02_unarmed_F', 'O_Heli_Transport_04_bench_F']] call NTA_fnc_airpatrol_callGroup;
-
-    {
-        [_x,currentWaypoint _x, getpos ([getpos _this, 1000, playableunits] call NTA_fnc_core_findnearestobject), 'FULL','SAD','Combat'] call NTA_fnc_vehicles_addwaypoint
-    } foreach (server getvariable ['Dampatrols',[]]);
 
     for "_i" from 0 to count (list _this) -1 do {
         {
@@ -35,7 +36,6 @@ DamTrigger = createTrigger ["EmptyDetector", [9257.33,13832.9,0]];
 DamTrigger setTriggerArea [300, 250, 90, true];
 DamTrigger setTriggerType "SWITCH";
 DamTrigger setTriggerActivation ["WEST", "EAST D", false];
-DamTrigger setSoundEffect ["Alarm", "", "", ""];
 DamTrigger setTriggerStatements ["this && damactive && {vehicle _x in thisList && isplayer _x && ((getPosATL _x) select 2) < 15} count playableunits > 0", "thistrigger call fnc_dam_active", ""];
 
  _start = createVehicle ["Land_Factory_Tunnel_F", _pos, [], 0, "CAN_COLLIDE"];

@@ -73,7 +73,6 @@ if (count _this >= 7) then {
 	_apParaDrop 	= true;
 	_apUserInsert 	= false;
 	_apParaVars 	= _this select 6;
-	//[_height, _count, _troopcount, _survivors]
 };
 
 format ["airpatrol %1", _this] call nta_fnc_log;
@@ -194,9 +193,10 @@ for "_counter" from 1 to _count step 1 do {
 
 		_NTA_Airpatrol_Crew pushback _x;
 	} foreach units group _Heli;
+
 	_heli removeAllEventHandlers "Killed";
 	_heli removeAllEventHandlers "Engine";
-	str [_dir, getdir _heli] call NTA_fnc_log;
+
 	//Add killed EH
 	_heli addeventhandler ["Killed", {
 	 	(_this select 0) spawn {
@@ -219,7 +219,7 @@ for "_counter" from 1 to _count step 1 do {
 	 	if !(_this select 1) then {
 		 	(_this select 0) spawn {
 				_time = time;
-				waituntil {time >= (_time + (5*60)) && {{isPlayer _x} count (crew _this) == 0}};
+				waituntil {time >= (_time + (5*60)) && {{isPlayer _x} count (crew _this) == 0} && {{_x distance _this < 800} count playableUnits == 0}};
 
 				if !(_this getvariable ["NTA_Airpatrol_Crash", false]) then {
 					{
@@ -253,6 +253,7 @@ for "_counter" from 1 to _count step 1 do {
 	if (typeof _heli iskindof "Plane") then {
 		_heli setvariable ["NTA_Tickets", 80, true];
 	};
+
 	_heli setVariable ["IL_Action_Night", false, true];
 	_heli setvariable ["Airpatrol_Mission", "FlyingIn"];
 	_heli setvariable ["Airpatrol_Target", _targetPos, true];
@@ -271,7 +272,6 @@ NTA_airpatrolCache setvariable[ format ["NTA_Airpatrol_Group_%1", _side], _grp, 
 
 //create briefing
 if (_side == WEST) then {
-
 	_briefing = format [localize "STR_NTA_AP_Briefing_WEST1",_vehname,  _targetPos distance (leader _grp), _picture, _count];
 } else {
 	_briefing = format [localize "STR_NTA_AP_Briefing_EAST1",_vehname,  _targetPos distance (leader _grp),_picture, _tickets, _count];
@@ -282,6 +282,7 @@ if (_side == WEST) then {
 switch (true) do {
     case (_apParaDrop): {
     	[_NTA_Airpatrol_Veh, _startPos, _targetPos, _apUser, _apParaVars] call NTA_fnc_airpatrol_insertParaTroops;
+    	NTA_airpatrolCache setvariable [format ["NTA_Airpatrol_Serverside_%1", _side], false];
     };
     case (_apinsertTroops || {_apUserInsert}): {
     	[_NTA_Airpatrol_Veh, _targetPos, _apUserInsert, _apUser] call NTA_fnc_airpatrol_insertTroops;

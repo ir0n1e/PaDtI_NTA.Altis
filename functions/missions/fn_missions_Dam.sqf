@@ -14,7 +14,7 @@ if (!isserver) exitwith {};
  	[[9121.4,13742.2,1], 1.2, "Land_nav_pier_m_F", 5, 39, 0, 0] call NTA_fnc_missions_DamCreate;
 
 
-	sleep 5;
+	sleep 30;
 
 	waituntil {sleep 5; DamActive && {!alive DamVent}};
 	call NTA_fnc_missions_damExp;

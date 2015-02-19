@@ -3,7 +3,7 @@ private ["_locs","_target","_count","_bomb","_time"];
 _target = [_this, 0, []] call bis_fnc_param;
 _count = [_this, 1, [3]] call bis_fnc_param;
 
-_bomb = "M_Titan_AA_long";
+_bomb = "R_TBG32V_F";
 _locs = [_target, _count] call NTA_fnc_getRandMkrLocs;
 _time = time;
 

@@ -13,7 +13,8 @@ if (hasInterface) then {
 		sleep 15;
 
 		titleText ["B Y   I r 0 n 1 E   N T A", "BLACK IN", 20];
-		10 fadesound 0.9;
+		sleep 10;
+        10 fadesound 0.9;
 
 
 		//1 cutRsc["ntaImage", "BLACK IN", 3];
