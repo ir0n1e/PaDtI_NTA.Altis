@@ -22,7 +22,7 @@ _this spawn {
 		{
 			_unit = _x;
 
-			if (!(_unit getvariable ["NTA_Airpatrol_Crash", false]) && {!alive _unit} && {!(_unit in call NTA_fnc_all_vehicles)} && {{_x distance _unit < 500} count playableUnits == 0}) then {
+			if (!(_unit getvariable ["NTA_Airpatrol_Crash", false]) && {!alive _unit} && {!(_unit in call NTA_fnc_all_vehicles)} && {{_x distance _unit < 800} count playableUnits == 0}) then {
 				deletevehicle _unit;
 			};
 		} foreach vehicles + allunits;
