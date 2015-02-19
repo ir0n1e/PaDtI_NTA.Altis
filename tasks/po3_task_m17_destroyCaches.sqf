@@ -40,8 +40,12 @@ private["_location","_position","_locaname"];
 			};
 		};
 		_cache allowdammage true;
+		_cache addEventHandler ["handledamage", {
+		    if (((_this select 4) in ["SatchelCharge_Remote_Ammo","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo_Scripted","SatchelCharge_Remote_Ammo_Scripted"]) && ((_this select 2) > 0.15) ) then {1} else {_this select 2};
+
+		    }];
 		_cache spawn { waitUntil { !(alive _this) || damage _this > 0.8 }; deleteVehicle _this; };
-		_caches set [count _caches, _cache];
+		_caches pushBack _cache;
 
 		_grp = nil;
 		_grp = [ position _cache, (PO3_side_3 select 0), "EN_PatrolGroup0", 20 ] call PO3_fnc_createGroup;
@@ -51,7 +55,6 @@ private["_location","_position","_locaname"];
 			sleep 1;
 		};
 	};
-	_caches call PO3_fnc_setDamageEH_C4Only;
 
 	{
 		if(PO3_debug) then {
