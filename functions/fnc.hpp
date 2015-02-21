@@ -100,6 +100,7 @@
 		class crate_crew;
 		class crate_engineer;
 		class crate_exp;
+		class crate_expBox;
 		class crate_fill;
 		class crate_ghost;
 		class crate_gren;
@@ -110,15 +111,15 @@
 		class crate_marshall;
 		class crate_medic;
 		class crate_medicbox;
+		class crate_optics;
 		class crate_playervariables;
 		class crate_respawn;
 		class crate_rifle;
 		class crate_sniper;
 		class crate_tfr;
+		class crate_waterBox;
 		class crate_xmedsys_all;
 		class crate_xmedsys_medic;
-		class crate_expBox;
-		class crate_waterBox;
 	};
 	class Alive {
 		file = "functions\Alive";

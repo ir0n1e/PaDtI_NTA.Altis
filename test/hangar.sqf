@@ -103,10 +103,19 @@ _obj setPosASL _pos;
 _obj call NTA_fnc_crate_agm;
 _objects pushBack _obj;
 
+_pos = [getposASL _obj, -1, 35] call BIS_fnc_relPos;
+_obj = "Box_NATO_AmmoOrd_F" createVehicle [0,0,0];
+_obj setPosASL _pos;
+_obj call NTA_fnc_crate_optics;
+_objects pushBack _obj;
+
 if (isClass(configfile >> "CfgPatches" >> "task_force_radio_items")) then {
 	_pos = [getposASL _obj, -1, 35] call BIS_fnc_relPos;
 	_obj = "TF_NATO_Radio_Crate" createVehicle [0,0,0];
 	_obj setPosASL _pos;
+	if (isclass (configfile >> "CfgPatches" >> "AGM_Logistics")) then {
+		[_obj] call AGM_Drag_fnc_makeUndraggable;
+	};
 	_objects pushBack _obj;
 };
 
@@ -114,6 +123,9 @@ if (missionNamespace getvariable ["haveBWplus", false] && {("params_NTA_Bwplus" 
 	_pos = [getposASL _obj, -1, 35] call BIS_fnc_relPos;
 	_obj = "BWplus_Box_weapons_SF" createVehicle [0,0,0];
 	_obj setPosASL _pos;
+	if (isclass (configfile >> "CfgPatches" >> "AGM_Logistics")) then {
+		[_obj] call AGM_Drag_fnc_makeUndraggable;
+	};
 	_objects pushBack _obj;
 };
 
@@ -126,7 +138,9 @@ if (missionNamespace getvariable ["haveBWplus", false] && {("params_NTA_Bwplus" 
 
 {
 	_x allowdammage false;
-
+	if !(typeof _x iskindof "ReammoBox_F") then {
+		_x enableSimulationGlobal false;
+	};
 } foreach _objects;
 
 
