@@ -40,7 +40,7 @@ if (isClass(configFile/"CfgPatches"/"AGM_Core")) then {
 };
 
 
-setdate [2015, 02, 01, ("NTA_TIME" call bis_fnc_getParamValue), 0];
+setdate [2015, 06, 15, ("NTA_TIME" call bis_fnc_getParamValue), 0];
 
 Wache3 setpos [26763.6,24796.6,0.00135994];
 
@@ -55,6 +55,7 @@ Factory setMarkerSize [600,600];
 
 Island_house = createMarker ["Island_house",[13592.1,12196.9,0]];
 Island_house setMarkerSize [20,20];
+
 
 
 if (("NTA_TRAINING_Shoothouse" call bis_fnc_getParamValue) > 0) then {
@@ -91,7 +92,7 @@ call NTA_fnc_agmlogistics_init;
 call NTA_fnc_vehicles_init;
 call NTA_fnc_players_adminActions;
 call NTA_fnc_base_weapons;
-call NTA_fnc_cleanup;
+//call NTA_fnc_cleanup;
 
 if (("NTA_Civilians" call bis_fnc_getParamValue) > 0) then {
 	call NTA_fnc_civilians_init;
@@ -104,9 +105,12 @@ if (NTA_PUBLIC) then {
 	call NTA_fnc_eos_init;
 };
 
-
-
-
+//_boxes = ["medic_box1", "medic_box2", "agm_box2", "player_box"];
+{
+	if (!(str _x in call NTA_fnc_all_vehicles) && {isnull (driver _x)} && {!(_x isKindOf "static")} && {!(typeof _x iskindof "ReammoBox_F")}) then {
+		_x enableSimulationGlobal false;
+	};
+} foreach vehicles;
 
 NTA_ServerInit = true;
 publicvariable "NTA_ServerInit";

@@ -11,6 +11,9 @@ enableSaving [false, false];
 enableTeamswitch false;
 enableEngineArtillery true;
 enableSentences false;
+if (("NTA_Weather" call bis_fnc_getParamValue) > 0) then {
+	[] call NTA_fnc_weather;
+};
 
 0 = [] execvm "externScripts.sqf";
 
@@ -23,12 +26,6 @@ if (NTA_DEBUG) then {
 	OnMapSingleClick "vehicle player SetPos [_pos select 0, _pos select 1, if( (vehicle player) isKindof ""AIR"" && isEngineOn (vehicle player) ) then { 100 }else{ 0 } ]";
 	player allowDamage false;
 };
-
-
-if (("NTA_Weather" call bis_fnc_getParamValue) > 0) then {
-	[] call NTA_fnc_weather;
-};
-
 
 NTA_mainINIT = true;
 publicvariable "NTA_mainINIT";

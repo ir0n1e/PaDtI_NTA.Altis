@@ -65,7 +65,7 @@ player addeventhandler ["killed", {
 		m3 = createmarkerlocal ["respawn_west_3", [getpos (leader group _p), [5, 10],2,0] call PO3_fnc_getSafePos];
 		m3 setMarkerTextLocal format ["%1 %2", name (leader group _p), localize "STR_NTA_SMALLGEAR"];
 
-		m4 = createmarkerlocal ["respawn_west_4", [getpos (leader group _p), [400, 500],2,0] call PO3_fnc_getSafePos];
+		m4 = createmarkerlocal ["respawn_west_4", [getpos (leader group _p), [800, 1000],2,0] call PO3_fnc_getSafePos];
 		m4 setMarkerTextLocal format ["%1 %2", name (leader group _p),  localize "STR_NTA_FULLGEAR"];
 		respawnMarkers pushBack m3;
 		respawnMarkers pushBack m4;

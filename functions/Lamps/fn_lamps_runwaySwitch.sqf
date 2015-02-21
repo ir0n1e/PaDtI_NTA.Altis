@@ -1,5 +1,5 @@
 _this spawn {
-	private "_switchOn";
+	private ["_switchOn", "_simulation"];
 
 	_switchOn = _this select 0;
 
@@ -9,15 +9,20 @@ _this spawn {
 
 	if (_switchOn) then {
 		_switchOn = false;
+		_simulation = true;
+
 	} else {
 		_switchOn = true;
+		_simulation = false;
 	};
 
 	{
-		_script = [_x, _switchOn] spawn {
+		_script = [_x, _switchOn, _simulation] spawn {
 			_obj 		= _this select 0;
 			_switchOn 	= _this select 1;
+			_simulation = _this select 2;
 
+			_obj enableSimulationGlobal _simulation;
 			_obj hideObjectGlobal _switchOn;
 		};
 		waituntil {scriptDone _script};

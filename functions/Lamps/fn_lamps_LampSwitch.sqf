@@ -27,6 +27,7 @@ _this spawn {
 		};
 
 		if (_switchOn) then {
+			_x enableSimulationGlobal true;
 			for "_i" from 0 to (count _reflectors) -1 do {
 				_r = gettext (configfile >> "CfgVehicles" >> typeof _x >> "Reflectors" >> (_reflectors select _i) >> "hitpoint");
 				//Flash first reflector
@@ -61,6 +62,7 @@ _this spawn {
 				_r = gettext (configfile >> "CfgVehicles" >> typeof _x >> "Reflectors" >> (_reflectors select _i) >> "hitpoint");
 				_x setHit [_r, 0.97];
 			};
+			_x enableSimulationGlobal false;
 		};
 	} foreach (_lamps select 0);
 };
