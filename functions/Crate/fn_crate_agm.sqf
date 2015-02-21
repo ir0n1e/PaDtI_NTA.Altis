@@ -1,4 +1,7 @@
-if (!isserver || {!(isClass(configFile/"CfgPatches"/"AGM_Core"))}) exitwith {};
+if !(isClass(configFile/"CfgPatches"/"AGM_Core")) exitwith {};
+if (isclass (configfile >> "CfgPatches" >> "AGM_Logistics")) then {
+	[_this] call AGM_Drag_fnc_makeUndraggable;
+};
 
 _this spawn {
 	while {true} do {

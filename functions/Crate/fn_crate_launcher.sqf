@@ -1,5 +1,8 @@
 if(!isserver) exitwith {};
 _this spawn {
+	if (isclass (configfile >> "CfgPatches" >> "AGM_Logistics")) then {
+		[_this] call AGM_Drag_fnc_makeUndraggable;
+	};
 
 	while {true} do {
 		_this call NTA_fnc_crate_clear_all;

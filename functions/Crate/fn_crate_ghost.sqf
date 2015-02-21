@@ -11,5 +11,4 @@ _crate addMagazinecargoGlobal ["BWA3_20Rnd_762x51_G28", 2];
 _crate addMagazinecargoGlobal ["BWA3_10Rnd_762x51_G28", 2];
 _crate addmagazinecargoGlobal ["DemoCharge_Remote_Mag", 2];
 _crate addMagazinecargoGlobal ["BWA3_120Rnd_762x51", 2];
-_crate addmagazinecargoGlobal ["DemoCharge_Remote_Mag", 2];
 _crate addBackpackCargoGlobal ["BWA3_AssaultPack_Medic",1];

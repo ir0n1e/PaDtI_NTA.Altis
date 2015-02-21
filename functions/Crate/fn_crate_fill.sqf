@@ -26,6 +26,11 @@ for "_i" from 0 to (count _boxes) - 1 do {
 		_boxNew allowdammage false;
 		_boxNew setposATL [_pos select 0, _pos select 1, (_pos select 2) +0.5];
 		_boxNew setdir _dir;
+
+		if (isclass (configfile >> "CfgPatches" >> "AGM_Logistics")) then {
+			[_boxNew] call AGM_Drag_fnc_makeUndraggable;
+		};
+
 		if (_i == 0) then {
 			_boxNew call NTA_fnc_agm_WeaponsActions;
 		};
