@@ -43,4 +43,4 @@ publicvariable "NTA_VehiclesInit";
 format ["Vehicle Init in %1 sec Done...", (diag_ticktime - _time)] call NTA_fnc_log;
 
 NTA_VehiclesFirstrun = false;
-call NTA_fnc_vehicles_respawn;
+[] spawn NTA_fnc_vehicles_respawn;

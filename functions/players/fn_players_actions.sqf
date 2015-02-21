@@ -1,8 +1,5 @@
 
-
 call NTA_fnc_lamps_actions;
-
-veh = nil;
 
 if (("NRF_Training" call bis_fnc_getParamValue) > 0) then {
 	player addAction["<t color='#5FB404'>Third Person view</t>",

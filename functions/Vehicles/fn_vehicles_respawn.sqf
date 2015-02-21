@@ -3,7 +3,7 @@ _this spawn {
     _first = true;
     sleep 20;
 
-    while {("NTA_EVENT" call bis_fnc_getParamValue) <= 0} do {
+    while {_first || ("NTA_EVENT" call bis_fnc_getParamValue) <= 0} do {
         _time = time;
         {
                 // Define variables
@@ -88,7 +88,7 @@ _this spawn {
                 };
 
                 deleteVehicle _veh;
-                sleep 0.5;
+                sleep 0.1;
 
                 if (_type == "B_UAV_02_CAS_F") then {
                     _uav = [getMarkerPos "marker_drone1", 0, _type, WEST] call BIS_fnc_spawnVehicle;

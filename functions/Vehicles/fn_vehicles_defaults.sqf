@@ -131,20 +131,21 @@ if (isClass(configFile/"CfgPatches"/"BWA3_Common")) then {
         };
     };
 };
-if (("NTA_EVENT" call bis_fnc_getParamValue) == 0 && {missionNamespace getVariable ["haveAGM", false]}) then {
-        [
-            _veh,
-            "Unlock", 8, {
-            (_this select 0) getVariable "locked" && {alive (_this select 0)} && {[(_this select 0)] call NTA_fnc_BWplus_checkVehicleRights} && {[(_this select 0)] call NTA_fnc_core_checkVehicleRights}},
-            {[(_this select 0)] call NTA_fnc_vehicles_unlock},
-            false
-        ] call AGM_Interaction_fnc_addInteraction;
 
-        [
-            _veh,
-            "Lock", 8, {
-            !((_this select 0) getVariable "locked") && {[(_this select 0)] call NTA_fnc_BWplus_checkVehicleRights} && {[(_this select 0)] call NTA_fnc_core_checkVehicleRights} && {count crew (_this select 0) == 0}},
-            {[(_this select 0)] call NTA_fnc_vehicles_lock},
-            false
-        ] call AGM_Interaction_fnc_addInteraction;
-    };
+if (("NTA_EVENT" call bis_fnc_getParamValue) == 0 && {missionNamespace getVariable ["haveAGM", false]}) then {
+    [
+        _veh,
+        "Unlock", 8, {
+        (_this select 0) getVariable "locked" && {alive (_this select 0)} && {[(_this select 0)] call NTA_fnc_BWplus_checkVehicleRights} && {[(_this select 0)] call NTA_fnc_core_checkVehicleRights}},
+        {[(_this select 0)] call NTA_fnc_vehicles_unlock},
+        false
+    ] call AGM_Interaction_fnc_addInteraction;
+
+    [
+        _veh,
+        "Lock", 8, {
+        !((_this select 0) getVariable "locked") && {[(_this select 0)] call NTA_fnc_BWplus_checkVehicleRights} && {[(_this select 0)] call NTA_fnc_core_checkVehicleRights} && {count crew (_this select 0) == 0}},
+        {[(_this select 0)] call NTA_fnc_vehicles_lock},
+        false
+    ] call AGM_Interaction_fnc_addInteraction;
+};

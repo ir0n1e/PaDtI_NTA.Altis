@@ -8,13 +8,14 @@ if (!isserver) exitwith {};
 	[[date select 0, date select 1, date select 2, 3, 30],"NTA_fnc_setDate",true,false] spawn BIS_fnc_MP;
 	_briefing 	= format [localize "STR_NTA_Missions_Dam", date, 100];
 
-	[parseText _briefing, "hint"] call bis_fnc_mp;
-	["DestroyDam", "Destroy Dam", _briefing] call SHK_Taskmaster_add;
+
 
  	[[9121.4,13742.2,1], 1.2, "Land_nav_pier_m_F", 5, 39, 0, 0] call NTA_fnc_missions_DamCreate;
 
+	[parseText _briefing, "hint"] call bis_fnc_mp;
+	["DestroyDam", "Destroy Dam", _briefing] call SHK_Taskmaster_add;
 
-	sleep 30;
+	sleep 60;
 
 	waituntil {sleep 5; DamActive && {!alive DamVent}};
 	call NTA_fnc_missions_damExp;
