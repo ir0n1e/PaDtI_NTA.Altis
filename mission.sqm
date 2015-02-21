@@ -97,7 +97,6 @@ class Mission
 		"A3_Static_F_Mortar_01",
 		"A3_Supplies_F_Heli_Bladders",
 		"A3_Supplies_F_Heli_CargoNets"
-
 	};
 	addOnsAuto[]=
 	{
@@ -26820,7 +26819,7 @@ class Mission
 	};
 	class Markers
 	{
-		items=141;
+		items=145;
 		class Item0
 		{
 			position[]={26652.984,17.186451,24643.012};
@@ -27965,6 +27964,46 @@ class Mission
 			a=800;
 			b=1000;
 			angle=25.281099;
+		};
+		class Item141
+		{
+			position[]={3650.1367,10.350698,13242.562};
+			name="CIV_Kavala";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=800;
+			b=400;
+			angle=98.963486;
+		};
+		class Item142
+		{
+			position[]={11804.907,15.933119,14542.875};
+			name="CIV_Neochori";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=1800;
+			b=1000;
+			angle=135.34669;
+		};
+		class Item143
+		{
+			position[]={23546.252,14.317788,20044.947};
+			name="CIV_Delfinaki";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=530;
+			b=280;
+			angle=-13.1486;
+		};
+		class Item144
+		{
+			position[]={21141.145,26.992838,16713.225};
+			name="CIV_Paros";
+			markerType="ELLIPSE";
+			type="Empty";
+			a=800;
+			b=350;
+			angle=-119.094;
 		};
 	};
 	class Sensors

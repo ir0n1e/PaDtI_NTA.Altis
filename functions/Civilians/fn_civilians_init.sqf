@@ -18,14 +18,37 @@ _this spawn {
 	_time = diag_ticktime;
 
 	COS_distance = 800;//Set spawn distance
-	COShardlimit = 10;
+	COShardlimit = 15;
 	publicvariable "COShardlimit";
 
 	COS_isHC =  ( !(hasInterface) && !(isserver) );
 
-	blackListTowns = ["Sagonisi", "sagonisi", "Kamino Firing Range", "Stratis Air Base", "Camp Maxwell"];// Remove towns from COS
+	blackListTowns = [
+		"Sagonisi",
+		"sagonisi",
+		"Kamino Firing Range",
+		"Stratis Air Base",
+		"Camp Maxwell",
+		"Kavala",
+		"Aggelochori",
+		"Poliakko",
+		"Katalaki",
+		"Neochori",
+		"Stavros",
+		"Lakka",
+		"Alikampos",
+		"Delfinaki",
+		"Ioannina",
+		"Paros",
+		"Kalochori"
+	];// Remove towns from COS
 
-	whiteListMkrs = [];// Add Custom Markers for COS to populate
+	whiteListMkrs = [
+		"CIV_Kavala",
+		"CIV_Neochori",
+		"CIV_Delfinaki",
+		"CIV_Paros"
+	];// Add Custom Markers for COS to populate
 
 	DefaultSide = Civilian;// Set side of units spawned
 	publicvariable "Defaultside";
