@@ -92,16 +92,11 @@ player addeventhandler ["respawn", {
 	[_p, Respawn_unitGear] call NTA_fnc_players_respawnSwitch;
 }];
 
-
-
-
-
 [player] call NTA_fnc_players_actions;
 [] call NTA_fnc_AGM_addadminActions;
 [] call NTA_fnc_airpatrol_agmAddaction;
 [] call IL_fnc_init;
 [] call NTA_fnc_welcome;
-
 
 
 if (("NRF_Training" call bis_fnc_getParamValue) > 0) then {

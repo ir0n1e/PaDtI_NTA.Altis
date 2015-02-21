@@ -114,7 +114,9 @@ if (isClass(configfile >> "CfgPatches" >> "task_force_radio_items")) then {
 	_obj = "TF_NATO_Radio_Crate" createVehicle [0,0,0];
 	_obj setPosASL _pos;
 	if (isclass (configfile >> "CfgPatches" >> "AGM_Logistics")) then {
-		[_obj] call AGM_Drag_fnc_makeUndraggable;
+		//not working at this time
+		//[_obj] call AGM_Drag_fnc_makeUndraggable;
+		_obj setVariable ["AGM_disableDrag", true, true];
 	};
 	_objects pushBack _obj;
 };
@@ -124,7 +126,9 @@ if (missionNamespace getvariable ["haveBWplus", false] && {("params_NTA_Bwplus" 
 	_obj = "BWplus_Box_weapons_SF" createVehicle [0,0,0];
 	_obj setPosASL _pos;
 	if (isclass (configfile >> "CfgPatches" >> "AGM_Logistics")) then {
-		[_obj] call AGM_Drag_fnc_makeUndraggable;
+		//not working at this time
+		//[_obj] call AGM_Drag_fnc_makeUndraggable;
+		_obj setVariable ["AGM_disableDrag", true, true];
 	};
 	_objects pushBack _obj;
 };

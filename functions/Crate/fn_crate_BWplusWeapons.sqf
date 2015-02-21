@@ -1,6 +1,7 @@
 if(!isserver) exitwith {};
 if (isclass (configfile >> "CfgPatches" >> "AGM_Logistics")) then {
-	[_this] call AGM_Drag_fnc_makeUndraggable;
+	//[_this] call AGM_Drag_fnc_makeUndraggable;
+	_this setVariable ["AGM_disableDrag", true, true];
 };
 if (!(missionNamespace getvariable ["haveBWplus", false])) exitwith {};
 _this spawn {

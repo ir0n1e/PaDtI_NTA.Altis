@@ -11,6 +11,7 @@ enableSaving [false, false];
 enableTeamswitch false;
 enableEngineArtillery true;
 enableSentences false;
+
 if (("NTA_Weather" call bis_fnc_getParamValue) > 0) then {
 	[] call NTA_fnc_weather;
 };

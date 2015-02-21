@@ -49,7 +49,8 @@ _ammo_sniper 	= ["ammo_sniper1", "ammo_sniper2"];
 {
 	if (isclass (configfile >> "CfgPatches" >> "AGM_Logistics")) then {
 		_box = call compile _x;
-		[_box] call AGM_Drag_fnc_makeUndraggable;
+		//[_box] call AGM_Drag_fnc_makeUndraggable;
+		_box setVariable ["AGM_disableDrag", true, true];
 	};
 } foreach _ammo_at + _ammo_auto + _ammo_crew + _ammo_engineer + _ammo_exp + _ammo_gren + _ammo_jtac + _ammo_leader + _ammo_medic + _ammo_sniper;
 
