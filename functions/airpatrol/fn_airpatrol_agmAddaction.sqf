@@ -1,5 +1,4 @@
 
-
 	if (isClass(configFile/"CfgPatches"/"AGM_Interaction")) then {
 		NTA_Airpatrol_MoveGroupHome = ["AIRPATROL RTB", {call NTA_fnc_airpatrol_movehomeCondition}, {call NTA_fnc_airpatrol_movegrouphome}, false] call AGM_Interaction_fnc_addInteractionSelf;
 
@@ -8,9 +7,4 @@
 	} else {
 		player addAction["<t color='#5FB404'>Airpatrol RTB</t>",
 				{call NTA_fnc_airpatrol_movegrouphome}, nil, 6, false, true, '', "call NTA_fnc_airpatrol_movehomeCondition"];
-
-		player addeventhandler ["respawn",{
-			player addAction["<t color='#5FB404'>Airpatrol RTB</t>",
-				{call NTA_fnc_airpatrol_movegrouphome}, nil, 6, false, true, '', "call NTA_fnc_airpatrol_movehomeCondition"];
-		}];
 	};
