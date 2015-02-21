@@ -1,5 +1,5 @@
 if (!isserver || isnil "ammo_at1") exitwith {};
-private ["_ammo_at", "_ammo_auto", "_ammo_crew", "_engineer","_ammo_exp","_ammo_gren","_ammo_jtac","_ammo_leader","_ammo_medic","_ammo_sniper", "_time"];
+private ["_ammo_at", "_ammo_auto", "_ammo_crew", "_engineer","_ammo_exp","_ammo_gren","_ammo_jtac","_ammo_leader","_ammo_medic","_ammo_sniper", "_time", "_box"];
 "Starting Playerboxes Init" call NTA_fnc_log;
 _time = diag_ticktime;
 
@@ -13,7 +13,6 @@ _ammo_jtac 		= ["ammo_jtac1", "ammo_jtac2", "ammo_jtac3"];
 _ammo_leader 	= ["ammo_leader1", "ammo_leader2", "ammo_leader3", "ammo_leader4", "ammo_leader5", "ammo_leader6"];
 _ammo_medic 	= ["ammo_medic1", "ammo_medic2", "ammo_medic3", "ammo_medic4"];
 _ammo_sniper 	= ["ammo_sniper1", "ammo_sniper2"];
-
 
 {
  	call compile format ["%1 setvariable ['CrateFnc', 'NTA_fnc_crate_at', true]", _x];
@@ -46,6 +45,13 @@ _ammo_sniper 	= ["ammo_sniper1", "ammo_sniper2"];
 {
  	call compile format ["%1 setvariable ['CrateFnc', 'NTA_fnc_crate_sniper', true]", _x];
 } foreach _ammo_sniper;
+
+{
+	if (isclass (configfile >> "CfgPatches" >> "AGM_Logistics")) then {
+		_box = call compile _x;
+		[_box] call AGM_Drag_fnc_makeUndraggable;
+	};
+} foreach _ammo_at + _ammo_auto + _ammo_crew + _ammo_engineer + _ammo_exp + _ammo_gren + _ammo_jtac + _ammo_leader + _ammo_medic + _ammo_sniper;
 
 NTA_PALAYERBOXES = true;
 publicVariable "NTA_PALAYERBOXES";
