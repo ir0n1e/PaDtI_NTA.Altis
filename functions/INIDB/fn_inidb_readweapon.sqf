@@ -32,7 +32,7 @@ _primaryWeaponItemsadd = [_unitFileName, _sectionTitle2, "primaryWeaponItems", "
 
 if (_choice == "weaponinfo") exitwith {
 
-	if (!isnil "_weaponadd") then {
+	if (!isnil "_weaponadd" && {_weaponadd != ""}) then {
 		_items = [];
 		_items pushback _weaponadd;
 
@@ -48,7 +48,9 @@ if (_choice == "weaponinfo") exitwith {
 };
 
 if (!isnil "_weaponadd") then {
-	_unit removeWeaponGlobal (primaryWeapon _unit);
+	if (primaryWeapon _unit != "" ) then {
+		_unit removeWeaponGlobal (primaryWeapon _unit);
+	};
 	_unit addweaponGlobal _weaponadd;
 };
 //for "_k" from 0 to (count _itemsadd) do {_unit additem (_itemsadd select _k)};
