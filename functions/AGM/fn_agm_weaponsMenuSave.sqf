@@ -58,11 +58,16 @@ _this spawn {
 
 					_items = player getvariable format ["weaponinfo%1", _this select 1];
 					player removeWeapon (primaryWeapon player);
-					player addweapon (_items select 0);
+					if ((_items select 0) != "") then {
+						player addweapon (_items select 0);
+					};
+
 					removeAllPrimaryWeaponItems player;
 
 					for "_m" from 1 to (count _items ) do {
-						player addprimaryWeaponItem (_items select _m);
+						if ((_items select _m) != "") then {
+							player addprimaryWeaponItem (_items select _m);
+						};
 					};
 				};
 
