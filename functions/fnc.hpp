@@ -188,6 +188,7 @@
 		class airpatrol_userInsertion;
 		class airpatrol_agmOpenParaMenu;
 		class airpatrol_agmOpenParaConfMenu;
+		class airpatrol_userInsertionDefaults; 
 	};
 	class Base {
 		file = "functions\Base";
