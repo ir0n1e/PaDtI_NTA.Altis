@@ -28,10 +28,10 @@ _realtime = true;
 // Random time before new forecast
 // true: forecast happens bewteen mintime and maxtime
 // false: forecast happens at mintime
-_random = true;
+_random = false;
 
 // Min time seconds (real time) before a new weather forecast
-_mintime = (5*60);
+_mintime = 60;
 
 // Max time seconds (real time) before a new weather forecast
 _maxtime = (10*60);
@@ -155,14 +155,13 @@ _rainextra = 0;
 _lastOvercast = random 1;
 while {true} do {
 	_overcastExtra = [-0.15, 0.15] call NTA_fnc_getRandArrayPos;
-		_overcast = _lastOvercast + _overcastExtra;
-		if (_overcast < 0) then {
-			_overcast = 0.2;
-		};
-		if (_overcast > 1) then {
-			_overcast = 0.8;
-		};
-
+	_overcast = _lastOvercast + _overcastExtra;
+	if (_overcast < 0) then {
+		_overcast = 0.2;
+	};
+	if (_overcast > 1) then {
+		_overcast = 0.8;
+	};
 
 	if((date select 1 > 9) || (date select 1 < 3)) then {
 		_windextra = 1.5;
@@ -187,7 +186,6 @@ while {true} do {
 		_rain = 0;
 	};
 
-
 	if((date select 3 > 2) && (date select 3 <6)) then {
 		_fog = 0.2 + (random 0.4);
 	} else {
@@ -197,8 +195,6 @@ while {true} do {
 			_fog = 0;
 		};
 	};
-
-
 
 	if(random 1 > 0.95) then {
 		_wind = [_windextra + (random 7) , _windextra + (random 7), true];
