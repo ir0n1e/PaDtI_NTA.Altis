@@ -85,8 +85,8 @@ if(PO3_debug) then {
 		_marker setMarkerShapelocal "ICON";
 		_marker setMarkerTypelocal "mil_dot";
 		_marker setMarkerColorlocal (_x select 1);
-		_marker setMarkerSizeLocal [0.5,0.5];
-		_marker setMarkerAlpha 0.3;
+		_marker setMarkerSizeLocal [1,1];
+		_marker setMarkerAlpha 1;
 	} foreach (_locPOI+_locTWN+_locCTY+_locBSE+_locHIL+_locWTR+_locRSP);
 };
 

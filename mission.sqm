@@ -3107,7 +3107,7 @@ class Mission
 			vehicle="SignAd_Sponsor_ARMEX_F";
 			skill=0.60000002;
 			text="NTA_Airpatrol_UserInsertion_Obj";
-			init="this allowDamage false; this setObjectTexture [0, ""pics\nta-Userinsertion.jpg""];this setposASL [getposASL this select 0, getposASL this select 1,(getposASL this select 2) - 0.4]";
+			init="this allowDamage false; this setposASL [getposASL this select 0, getposASL this select 1,(getposASL this select 2) - 0.4]; this setObjectTexture [0, ""pics\nta-Userinsertion.jpg""]";
 		};
 		class Item41
 		{
