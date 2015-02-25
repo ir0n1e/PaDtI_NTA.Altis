@@ -46,7 +46,7 @@ _prev = _list;
 _missioncount = if(isNil "PO3_param_missioncount") then { 3 }else{ PO3_param_missioncount };
 if !(PO3_debug) then { sleep 30 };
 while { _missioncount != 0 } do {
-	waituntil {!damactive && {!EOS_ACTIVE}};
+	waituntil { sleep 10; !damactive && {!EOS_ACTIVE}};
 	if (!(PO3_ForceTask select 0)) then {
 		_lim = 0;
 		while{ _next IN _prev && _lim < count _list } do {
@@ -61,7 +61,7 @@ while { _missioncount != 0 } do {
 	};
 	_missioncount = _missioncount - 1;
 	sleep 5;
-	waituntil {count _mkrArray == 0};
+	waituntil { sleep 10; count _mkrArray == 0};
 
 	_TASK_Script = execvm format["tasks\%1.sqf", _next];
 	format ["Task isHC: %1 isServer: %2", (!isServer && !hasinterface), isserver] call NTA_fnc_log;
@@ -77,7 +77,7 @@ while { _missioncount != 0 } do {
 		};
 	};*/
 
-	waituntil {str PO3_TASK__POS != "[0,0,0]"};
+	waituntil { sleep 10; str PO3_TASK__POS != "[0,0,0]"};
 	publicVariableserver "PO3_TASK__POS";
 	[] spawn {
 		waituntil {({_x distance PO3_TASK__POS < 350}count playableunits) > 0};
@@ -91,7 +91,7 @@ while { _missioncount != 0 } do {
 	};
 
 	{
-		if (((getmarkerpos _x) distance PO3_TASK__POS) <= 1000) then {
+		if (((getmarkerpos _x) distance PO3_TASK__POS) <= 2500) then {
 			_alpha = markeralpha _x;
 			_x setMarkerAlpha 0;
 			[0,"setmarkeralpha",_x,true] call BIS_fnc_MP;
