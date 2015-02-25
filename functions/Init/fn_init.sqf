@@ -12,12 +12,10 @@ enableTeamswitch false;
 enableEngineArtillery true;
 enableSentences false;
 
+0 = [] execvm "externScripts.sqf";
 if (("NTA_Weather" call bis_fnc_getParamValue) > 0) then {
 	[] call NTA_fnc_weather;
 };
-
-0 = [] execvm "externScripts.sqf";
-
 
 call NTA_fnc_taskforce_init;
 call NTA_fnc_agmmedsys_init;

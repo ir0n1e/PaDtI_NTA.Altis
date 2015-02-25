@@ -36,7 +36,7 @@ respawnTemplates[] = {"MenuPosition"};
 corpseManagerMode	= 2;
 corpseLimit = 1;
 forceRotorLibSimulation = 0;
-
+#define USERINSERTION 1
 
 class Header {
 	maxPlayers = 41;	// <!-- CHANGE Where the number is the total playable slots
@@ -46,7 +46,7 @@ class Header {
 
 class Extended_InitPost_EventHandlers {
     class AllVehicles {
-        init="_this call NTA_fnc_curator_init; _this call NTA_fnc_cleanup;";
+        init="_this call NTA_fnc_curator_init; _this call NTA_fnc_cleanup; if !(str (_this select 0) in call NTA_fnc_all_vehicles) then {_this call NTA_fnc_vehicles_unlock;};";
     };
 };
 
@@ -113,5 +113,89 @@ class CfgSounds {
     sound[] = {"sounds\go.ogg", 1, 1};
     // subtitle delay in seconds, subtitle text
     titles[] = {1, "* GO GO GO *"};
+  };
+};
+
+#include <Macros.hpp>
+
+class CfgVehicles {
+  class Man;
+  class CAManBase: Man {
+    class AGM_SelfActions {
+      class NTA_AdminAction {
+        displayName = "Admin Menu";
+        conditionShow = "[AGM_Player] call NTA_fnc_core_isAdmin";
+        condition = "[AGM_Player] call NTA_fnc_core_isAdmin";
+        statement = "call NTA_fnc_agm_openadminmenu";
+        priority = 3;
+        Icon = "pics\NTA_Logo_G.paa";
+      };
+      class NTA_Airpatrol_MoveGroupHome {
+        displayName = "Airpatrol RTB";
+        showdisabeled = 0;
+        condition = "[AGM_Player] call NTA_fnc_airpatrol_movehomeCondition";
+        statement = "call NTA_fnc_airpatrol_movegrouphome";
+        priority = 1.2;
+        distance = 4;
+        Icon = "pics\NTA_Logo_G.paa";
+      };
+      class NTA_Airpatrol_CallCas {
+        displayName = "Call CAS";
+        showdisabeled = 0;
+        condition = "[AGM_Player] call NTA_fnc_airpatrol_callCAScondition";
+        statement = "[[[28713.2, 27432.7, 0], [1637.84, 13848.8, 0], getpos (_this select 1), [(NTA_airpatrolCache getvariable 'NTA_Airpatrol_CASunit_West')], WEST], 'NTA_fnc_airpatrol_Create'] call BIS_fnc_mp;['AP CAS',-(NTA_airpatrolCache getvariable 'NTA_Airpatrol_CAStickets_WEST')] call NTA_fnc_core_addTickets;";
+        priority = 1.2;
+        distance = 4;
+        Icon = "pics\NTA_Logo_G.paa";
+      };
+    };
+  };
+
+  class All;
+  class LandVehicle: All {
+    class AGM_Actions {};
+  };
+  class Air: All {
+    class AGM_Actions {};
+  };
+  class Ship: All {
+    class AGM_Actions {
+      MACRO_NTA_VEHICLELOCK
+    };
+  };
+  class Car: LandVehicle {
+    class AGM_Actions: AGM_Actions {
+      MACRO_NTA_VEHICLELOCK
+    };
+  };
+  class Tank: LandVehicle {
+    class AGM_Actions: AGM_Actions {
+      MACRO_NTA_VEHICLELOCK
+    };
+  };
+  class Helicopter: Air {
+    class AGM_Actions: AGM_Actions {
+      MACRO_NTA_VEHICLELOCK
+    };
+  };
+  class Plane: Air {
+    class AGM_Actions: AGM_Actions {
+      MACRO_NTA_VEHICLELOCK
+    };
+  };
+  class SignAd_Sponsor_F;
+  class SignAd_Sponsor_ARMEX_F: SignAd_Sponsor_F {
+    class AGM_Actions {
+      class NTA_Airpatrol_MoveGroupHome {
+        displayName = "User Insertion";
+        showdisabeled = 0;
+        conditionShow = "(AGM_Interaction_Target == NTA_Airpatrol_UserInsertion_Obj && {User_Insertion})";
+        condition = "true";
+        statement = "[AGM_Player] call NTA_fnc_airpatrol_userInsertionDefaults";
+        priority = 1.2;
+        distance = 4;
+        Icon = "pics\NTA_Logo_G.paa";
+      };
+    };
   };
 };

@@ -84,6 +84,7 @@ player addeventhandler ["respawn", {
 	if (_p getvariable "haveBWA3" && {_p getvariable "haveAGM"}) then {
 		[_p] call NTA_fnc_players_actions;
 	};
+	[] call NTA_fnc_airpatrol_agmAddaction;
 
 	if (str _p in NTAmedic) then {
 		_p setvariable ["AGM_ismedic",true, true];
@@ -93,7 +94,7 @@ player addeventhandler ["respawn", {
 }];
 
 [player] call NTA_fnc_players_actions;
-[] call NTA_fnc_AGM_addadminActions;
+//[] call NTA_fnc_AGM_addadminActions;
 [] call NTA_fnc_airpatrol_agmAddaction;
 [] call IL_fnc_init;
 [] call NTA_fnc_welcome;
