@@ -46,7 +46,7 @@ _prev = _list;
 _missioncount = if(isNil "PO3_param_missioncount") then { 3 }else{ PO3_param_missioncount };
 if !(PO3_debug) then { sleep 30 };
 while { _missioncount != 0 } do {
-	waituntil {!damactive};
+	waituntil {!damactive && {!EOS_ACTIVE}};
 	if (!(PO3_ForceTask select 0)) then {
 		_lim = 0;
 		while{ _next IN _prev && _lim < count _list } do {
