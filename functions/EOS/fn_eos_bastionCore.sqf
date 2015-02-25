@@ -120,7 +120,7 @@ _eosMarkers = server getvariable ["EOSmarkers", []];
     	_eosActive setTriggerArea [_mkrX, _mkrY, _mkrAgl, FALSE];
     	_eosActive setTriggerActivation ["WEST", "PRESENT", true];
     	_eosActive setTriggerTimeout [3, 3, 5, true];
-    	_eosActive setTriggerStatements [_actCond, "thisTrigger call NTA_fnc_eos_bastionLoop", _dCon];
+    	_eosActive setTriggerStatements [_actCond, "thisTrigger call NTA_fnc_eos_bastionLoop; PO3_force_TASKEND = true; publicVariable 'PO3_force_TASKEND', _dCon];
 
 
     	server setvariable [_trig, _eosActive, true];

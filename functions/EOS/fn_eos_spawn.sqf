@@ -178,13 +178,14 @@ _this spawn {
 				_bGrp pushback _bGroup;
 				_allunits = _allunits + (units _bGroup);
 				0 = [_bGroup, "INFskill"] call NTA_fnc_eos_setSkill;
-
+					0 = [leader _bGroup, _mkr, "SHOWMARKER", "SPAWNED", "SAFE", "LIMITED"] execVM "scripts\UPSMON.sqf";
+				/* AMBUSH not working alltime
 				if (_counter == 1) then {
 
-					0 = [leader _bGroup, _mkr, "SHOWMARKER", "AMBUSH", "SPAWNED", "LIMITED"] execVM "scripts\UPSMON.sqf";
+					0 = [leader _bGroup, _mkr, "SHOWMARKER", "AMBUSH", "SPAWNED", "LIMITED", "NOWP"] execVM "scripts\UPSMON.sqf";
 				} else {
-					0 = [leader _bGroup, _mkr, "SHOWMARKER", "SPAWNED", "SAFE", "LIMITED"] execVM "scripts\UPSMON.sqf";
 				};
+				*/
 				bGroup = nil;
 			};
 		};

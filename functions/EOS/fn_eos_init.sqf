@@ -48,7 +48,7 @@ VictoryColor = "colorGreen";	// Colour of marker after completion
 hostileColor = "colorRed";		// Default colour when enemies active
 bastionColor = "colorOrange";	// Colour for bastion marker
 
-EOShardlimit = 80;
+EOShardlimit = 120;
 EOS_ACTIVE = false;
 EOSmax		= 5;
 BOSmax		= 5;
@@ -105,10 +105,10 @@ null = [["city_32"],[5,1],[2,0],[2],[0,0],[0,0,EAST,TRUE,FALSE],[360,1 + floor (
 /*---------------------------------------------- ATTAQUE --------------------------------------------------------*/
 /*--------------------------------------- TRES GRANDES VILLES --------------------------------------------------------*/
 // Kavala
-null = [["city_1"],[0,0],[8,1],[4,1],[3],[_static],[0,0],[0,0,1500,EAST]] call NTA_fnc_eos_core; 		//tres grande ville
+null = [["city_1"],[10,2],[8,1],[4,1],[3],[_static],[0,0],[0,0,1500,EAST]] call NTA_fnc_eos_core; 		//tres grande ville
 
 
-null = [["city_3"],[0,0],[8,1],[4,1],[3],[_static],[0,0],[0,0,1500,EAST]] call NTA_fnc_eos_core; 		//tres grande ville
+null = [["city_3"],[5,1],[8,1],[4,1],[3],[_static],[0,0],[0,0,1500,EAST]] call NTA_fnc_eos_core; 		//tres grande ville
 null = [["Pyrgos"],[10,1],[8,1],[4,1],[3],[_static],[0,0],[0,0,1500,EAST]] call NTA_fnc_eos_core; 		//tres grande ville
 
 
@@ -158,7 +158,7 @@ null = [["city_40"],[0,0],[6,1],[2,1],[0],[_static],[0,0],[0,0,1500,EAST]] call 
 null = [["city_5"],[0,0],[6,1],[2,1],[0],[_static],[0,0],[0,0,1500,EAST]] call NTA_fnc_eos_core; 		//moyenne ville
 
 // Chalkeia
-null = [["city_6"],[0,0],[6,1],[2,1],[0],[_static],[0,0],[0,0,1500,EAST]] call NTA_fnc_eos_core; 		//moyenne ville
+null = [["city_6"],[5,1],[6,1],[2,1],[0],[_static],[0,0],[0,0,1500,EAST]] call NTA_fnc_eos_core; 		//moyenne ville
 
 // Dorida
 //null = [["city_32"],[0,1],[6,1],[2,1],[0],[2],[0,0],[0,0,1500,EAST]] call NTA_fnc_eos_core; //moyenne ville passée en bastion
