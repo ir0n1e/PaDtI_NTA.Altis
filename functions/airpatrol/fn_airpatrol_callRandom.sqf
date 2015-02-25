@@ -19,14 +19,16 @@ waituntil {NTA_Airpatrolrunning && !NTA_csatplaneInbound};
 
 switch (floor (random 3)) do {
     case 0: {
-    	NTA_airpatrolTarget setmarkerpos [_pos select 0, _pos select 1, 0];
+    	NTA_airpatrolTarget setMarkerAlpha 0;
+        NTA_airpatrolTarget setmarkerpos [_pos select 0, _pos select 1, 0];
 		NTA_airpatrolTarget setMarkerDir (getdir _target) + 90;
+
     	_planes = [NTA_airpatrolTarget,[2]] call NTA_fnc_airpatrol_callCsatPlane;
     	NTA_csatplaneInbound = true;
     	_planes spawn {
-    		{
-    			waituntil {(!alive _x) || (_x getvariable "NTA_bombsAway")};
-    		} foreach _this;
+
+    		waituntil {{alive _x} count _this == 0 || {{!(_x getvariable ["NTA_bombsAway", false])} count _this == 0}};
+
     		NTA_airpatrolTarget setmarkerpos [0,0,0];
     		NTA_csatplaneInbound = false;
     	};
