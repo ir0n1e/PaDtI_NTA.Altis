@@ -1,8 +1,12 @@
 _this spawn {
-	private ["_waypoints","_findWps","_mkr"];
 	_unit = _this select 0;
 	_waypoints = _this select 1;
 	_mkr = _this select 2;
+	_timeout = [0,0,0];
+
+	if (vehicle _unit == _unit) then {
+		_timeout = [0,2,4];
+	};
 
 	_unit setvariable ["OnMission", false];
 	_unit setvariable ["mission", "patrol"];
@@ -31,6 +35,7 @@ _this spawn {
 			_wp = _group addWaypoint [_wp, _i];
 			_wp setWaypointType "MOVE";
 			_wp setWaypointCompletionRadius 10;
+			_wp setWaypointSpeed "LIMITED";
 		};
 		waituntil {scriptDone _script};
 
@@ -39,6 +44,6 @@ _this spawn {
 			_wp setWaypointType "CYCLE";
 			_wp setWaypointCompletionRadius 20;
 		};
-		[_group,_i] setWaypointTimeout [0,2,4];
+		[_group,_i] setWaypointTimeout _timeout;
 	};
 };
