@@ -32,7 +32,7 @@ _primaryWeaponItemsadd = [_unitFileName, _sectionTitle2, "primaryWeaponItems", "
 
 if (_choice == "weaponinfo") exitwith {
 
-	if (!isnil "_weaponadd" && {_weaponadd != ""}) then {
+	if (!isnil "_weaponadd") then {
 		_items = [];
 		_items pushback _weaponadd;
 
