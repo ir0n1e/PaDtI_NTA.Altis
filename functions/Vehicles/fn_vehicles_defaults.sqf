@@ -131,7 +131,7 @@ if (isClass(configFile/"CfgPatches"/"BWA3_Common")) then {
         };
     };
 };
-
+/*
 if (("NTA_EVENT" call bis_fnc_getParamValue) == 0 && {missionNamespace getVariable ["haveAGM", false]}) then {
     [
         _veh,
@@ -149,3 +149,4 @@ if (("NTA_EVENT" call bis_fnc_getParamValue) == 0 && {missionNamespace getVariab
         false
     ] call AGM_Interaction_fnc_addInteraction;
 };
+*/

@@ -64,7 +64,7 @@ _this spawn {
                 _veh setvariable ["time",  time + _delay];
             };
 
-            if (_veh getvariable ["timeout", false] && {time > _veh getVariable "time"}) then {
+            if (_veh getvariable ["timeout", false] && {time > _veh getVariable "time"} && {{_x distance (getPos _veh) < 80} count playableUnits == 0}) then {
                 _veh setvariable ["dead", true];
             };
 
@@ -116,7 +116,7 @@ _this spawn {
                 _veh setVariable ["RespawnPos", [_position, _dir]];
                 _veh setvariable ["respawnVariables", _variables];
 
-                if (NTA_PUBLIC && {!_dynamic} || {_veh getvariable ["defultlocked", false]}) then {
+                if (!_dynamic || {_veh getvariable ["defultlocked", false]}) then {
                     [_veh] call NTA_fnc_vehicles_lock;
                 } else {
                     [_veh] call NTA_fnc_vehicles_unlock;
