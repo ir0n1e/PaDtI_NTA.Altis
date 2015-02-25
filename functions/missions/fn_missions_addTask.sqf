@@ -33,7 +33,7 @@ _this spawn {
 		};
 
 		_time = time;
-		waitUntil {sleep 10; !({_x distance _this > 500} count playableUnits == 0) || {time >= (_time + (10*60))}};
+		waitUntil {sleep 10; ({_x distance _pos < 500} count playableUnits == 0) || {time >= (_time + (10*60))}};
 		{
 			deletevehicle _x;
 		} foreach _allObjects;
@@ -64,7 +64,7 @@ _this spawn {
 		};
 
 		_time = time;
-		waitUntil {sleep 10; !({_x distance _this > 500} count playableUnits == 0) || {time >= (_time + (10*60))}};
+		waitUntil {sleep 10; ({_x distance _pos < 500} count playableUnits == 0) || {time >= (_time + (10*60))}};
 		{
 			deletevehicle _x;
 		} foreach _allObjects;
@@ -117,7 +117,7 @@ _this spawn {
 		};
 
 		_time = time;
-		waitUntil {sleep 10; !({_x distance _this > 500} count playableUnits == 0) || {time >= (_time + (10*60))}};
+		waitUntil {sleep 10; ({_x distance _pos < 500} count playableUnits == 0) || {time >= (_time + (10*60))}};
 		{
 			deletevehicle _x;
 		} foreach _allObjects;
