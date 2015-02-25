@@ -18,7 +18,8 @@ if (("NTA_Weather" call bis_fnc_getParamValue) > 0) then {
 };
 
 call NTA_fnc_taskforce_init;
-call NTA_fnc_agmmedsys_init;
+// moved to description.ext
+//call NTA_fnc_agmmedsys_init;
 call NTA_fnc_RAVlifter_init;
 
 if (NTA_DEBUG) then {
