@@ -11,6 +11,10 @@
  Open COS/AddScript_Vehicle.sqf to apply scripts to spawned vehicles.
  To get Array of COS markers use _allMarkers=server getvariable "COSmarkers";
 */
+fnc_delete_marker = {
+	deleteMarkerLocal _this;
+	deleteMarker _this;
+};
 
 _this spawn {
 	"Starting Civilians Init" call NTA_fnc_log;
@@ -73,7 +77,7 @@ _this spawn {
 	publicvariable "COSgarbagePool";
 
 
-	COSmaxGrps = 8;//Set Maximum group limit for COS at any one time (If limit is hit then civilians will be placed into a single group for each town)
+	COSmaxGrps = 20;//Set Maximum group limit for COS at any one time (If limit is hit then civilians will be placed into a single group for each town)
 	publicvariable "COSmaxGrps";
 
 	// Browse to line 81 to customise number of civilians that spawn.
@@ -95,8 +99,10 @@ _this spawn {
 			_name = markerText _x;// Get the markers description
 			if (_name == "") then {_name= _x;};
 			// If description is empty then use marker name
-			deletemarker _x;// Delete user placed marker
+			_x setMarkerAlpha 0;
 
+			[_x,"fnc_delete_marker",nil,true] call BIS_fnc_MP;
+			deletemarker _x;// Delete user placed marker
 		} else {
 		 	_name = text _x;// Get name
 		 	_sizeX = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (text _x) >> "radiusA");
@@ -163,8 +169,12 @@ _this spawn {
 			_foo setMarkerShape "ICON";
 			_foo setMarkerType "hd_dot";
 			_foo setMarkerText format ["%1 Factor %2",_name, _hostilefactor];
-			cosMkrArray set [count cosMkrArray,_foo];
-			if (!_showMarker) then {_foo setmarkerAlpha 0;} else {_foo setmarkerAlpha 0.5;};// Show or hide marker
+			cosMkrArray pushBack _foo;
+			if (!_showMarker) then {
+				_foo setmarkerAlpha 0;
+			} else {
+				_foo setmarkerAlpha 0.5;
+			};// Show or hide marker
 
 			// Get positions until we have enough for the population
 		 	_roadlist = _pos nearRoads _mSize;
