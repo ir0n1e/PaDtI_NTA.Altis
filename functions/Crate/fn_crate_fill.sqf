@@ -28,7 +28,8 @@ for "_i" from 0 to (count _boxes) - 1 do {
 		_boxNew setdir _dir;
 
 		if (isclass (configfile >> "CfgPatches" >> "AGM_Logistics")) then {
-			[_boxNew] call AGM_Drag_fnc_makeUndraggable;
+			//[_boxNew] call AGM_Drag_fnc_makeUndraggable;
+			_boxNew setVariable ["AGM_disableDrag", true, true];
 		};
 
 		if (_i == 0) then {
