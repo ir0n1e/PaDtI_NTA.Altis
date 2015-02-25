@@ -1,3 +1,5 @@
+if (!(isClass(configFile/"CfgPatches"/"AGM_Interaction"))) exitwith {};
+
 [_this, "Weapon Save", 10, {primaryweapon player != ""}, {[true] call NTA_fnc_agm_weaponsMenuSave}, false] call AGM_Interaction_fnc_addInteraction;
 
 [_this, "Weapon Load", 10, {true}, {[false] call NTA_fnc_agm_weaponsMenuSave}, false] call AGM_Interaction_fnc_addInteraction;
