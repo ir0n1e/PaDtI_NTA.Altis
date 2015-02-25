@@ -73,6 +73,14 @@
 			<English>Full Gear</English>
 			<German>Komplette Ausrüstung</German>
 		</Key>
+		<Key ID="STR_NTA_Lock">
+			<English>Lock</English>
+			<German>Abschließen</German>
+		</Key>
+		<Key ID="STR_NTA_Unlock">
+			<English>Unlock</English>
+			<German>Aufschließen</German>
+		</Key>
 
 	</Package>
 	<Package name="NTA_Airpatrol">
