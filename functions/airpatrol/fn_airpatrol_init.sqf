@@ -107,8 +107,9 @@ if (USERINSERTION && {!isnil "NTA_Airpatrol_UserInsertion_Obj"} && {isClass(conf
 	] call AGM_Interaction_fnc_addInteraction;
 };
 */
-if (USERINSERTION && {!isnil "NTA_Airpatrol_UserInsertion_Obj"}) then {
-	User_Insertion = true;
+if (!isnil "NTA_Airpatrol_UserInsertion_Obj") then {
+	User_Insertion = USERINSERTION;
+	publicVariable "User_Insertion";
 };
 
 if (_this select 0 == 0 && {_this select 1 == 0} && {_this select 2 == 0}) exitwith {
