@@ -47,7 +47,7 @@ _this spawn {
 		sleep 5;
 
 		if (alive _arty) then {
-			for "_c" from 0 to 1 do {
+			for "_c" from 0 to 2 do {
 				_pos = [
 					(_targetPos select 0) - _radius + (2 * random _radius),
 					(_targetPos select 1) - _radius + (2 * random _radius),
