@@ -35,7 +35,7 @@ _actions = [_actions, "", "", ""] call AGM_Interaction_fnc_AddSelectableItem;
 _actions = [_actions, "Add All", "", ["Add All", _player]] call AGM_Interaction_fnc_AddSelectableItem;
 _actions = [_actions, "---------------", "", ""] call AGM_Interaction_fnc_AddSelectableItem;
 
-if (count (_player getvariable [format ["insert%1", group _player], []]) > 6 || {name _player == "drei.zehn"}) then {
+if (count (_player getvariable [format ["insert%1", group _player], []]) > 5 || {name _player == "drei.zehn"}) then {
 	_actions = [_actions, format ["Para Drop %1", _player getVariable [format ["ParaDrop%1", group _player], false]], "", ["ParaDrop", _player]] call AGM_Interaction_fnc_AddSelectableItem;
 };
 

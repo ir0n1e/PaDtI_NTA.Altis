@@ -60,13 +60,14 @@ _apParaDrop		= false;
 _apParaVars		= [];
 _flyIngHeight	= 50;
 
+if (isnil "_apUser") then {
+	_apUserInsert = false;
+	_apUser		  = objnull;
+};
+
 if (count _this >= 6) then {
 	_apUserInsert = true;
 	_apUser = _this select 5;
-	if (isnil "_apUser") then {
-		_apUserInsert = false;
-		_apUser		  = objnull;
-	};
 };
 
 if (count _this >= 7) then {
