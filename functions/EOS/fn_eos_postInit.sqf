@@ -8,7 +8,7 @@ EOS_active_fnc = {
 	_mPos 		= _settings select 2;
 
 	PO3_force_TASKEND = true;
-	publicVariable "PO3_force_TASKEND"
+	publicVariable "PO3_force_TASKEND";
 
 	{
 		if ( _x != _mkr && {MarkerAlpha _x != 0 || {getmarkercolor _mkr != VictoryColor} || {MarkerAlpha _x != 0.0001}}) then {
