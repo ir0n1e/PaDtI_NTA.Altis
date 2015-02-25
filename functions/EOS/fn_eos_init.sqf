@@ -50,6 +50,9 @@ bastionColor = "colorOrange";	// Colour for bastion marker
 
 EOShardlimit = 80;
 EOS_ACTIVE = false;
+EOSmax		= 5;
+BOSmax		= 5;
+
 EOScounter = 0;
 BOScounter = 0;
 

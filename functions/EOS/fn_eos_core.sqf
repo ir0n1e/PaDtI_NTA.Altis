@@ -1,4 +1,4 @@
-private ["_HPpatrols","_HPgroupProbability","_CHgroupArray","_LVgroupArray","_HPgroupArray","_PAgroupArray","_CHgroupSize","_CHGroups","_SVehGroups","_AVgroupSize","_AVehGroups","_LVehGroups","_LVgroupSize","_PAgroupSize","_PApatrols","_HPpatrols","_HPgroupSize", "_actCond", "_maN", "_maH", "_mA", "_dcon", "_eosActive"];
+private ["_HPpatrols","_HPgroupProbability","_CHgroupArray","_LVgroupArray","_HPgroupArray","_PAgroupArray","_CHgroupSize","_CHGroups","_SVehGroups","_AVgroupSize","_AVehGroups","_LVehGroups","_LVgroupSize","_PAgroupSize","_PApatrols","_HPpatrols","_HPgroupSize", "_actCond", "_maN", "_maH", "_mA", "_dcon", "_eosActive","_counter"];
 
 
 _JIPmkr			= (_this select 0);
@@ -152,11 +152,11 @@ if !(_SVgroupProbability > floor random 100) then {
 
 _eosMarkers = server getvariable ["EOSmarkers", []];
 
-
+_counter = 0;
 {
 
 
-	if (floor (random 2) == 0 || EOScounter >= 5) then {
+	if (floor (random 3) != 0 || {EOScounter >= EOSmax}) then {
 		if (!(getmarkercolor _x == VictoryColor)) then {
 			_x setmarkercolor hostileColor;
 			_x setMarkerBrush "Border";

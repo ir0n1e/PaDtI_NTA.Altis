@@ -1,4 +1,4 @@
-private ["_CHgroupArray","_LVgroupArray","_PAgroupArray","_CHGroups","_AVehGroups","_LVehGroups","_PApatrols", "_time","_actCond","_dcon", "_eosmarkers", "_eosActive"];
+private ["_CHgroupArray","_LVgroupArray","_PAgroupArray","_CHGroups","_AVehGroups","_LVehGroups","_PApatrols", "_time","_actCond","_dcon", "_eosmarkers", "_eosActive","_counter"];
 
 
 
@@ -83,12 +83,12 @@ switch (_CHgroupSize) do {
     };
 };
 
-
+_counter = 0;
 _eosMarkers = server getvariable ["EOSmarkers", []];
 {
 
 
-    if (floor (random 2) == 0 || BOScounter >= 5) then {
+    if (floor (random 3) != 0 || {BOScounter >= BOSmax}) then {
         if (!(getmarkercolor _x == VictoryColor)) then {
            _x setmarkercolor bastionColor;
             _x setMarkerBrush "Border";

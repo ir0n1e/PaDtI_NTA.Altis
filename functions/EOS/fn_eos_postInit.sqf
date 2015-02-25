@@ -57,12 +57,14 @@ EOS_nonactive_fnc = {
 	_mPos 		= _settings select 2;
 
 	{
+		str (MarkerAlpha _x) call nta_fnc_log;
 		if (getmarkercolor _x != VictoryColor && {MarkerAlpha _x == 0.0001}) then {
 			_x setmarkerAlpha (_trig getVariable "EOSmarkerColor" select 0);
 		};
 	} foreach (server getvariable ["EOSmarkers", []]);
 };
 
+publicVariable "EOS_nonactive_fnc";
 _trigger = createTrigger ["EmptyDetector", getpos server];
 _trigger setTriggerActivation ["ANY", "PRESENT", true];
 _trigger setTriggerStatements ["EOS_ACTIVE", "call EOS_active_fnc", "call EOS_nonactive_fnc"];

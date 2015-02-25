@@ -203,6 +203,7 @@ if (_this getvariable ["eosclear", false]) exitwith {
 	_mkr setmarkercolor VictoryColor;
 	_mkr setmarkerAlpha _mAN;
 	deletevehicle _this;
+	call EOS_nonactive_fnc;
 
 	if (_debug) then {
 		hint "Zone Captured";
