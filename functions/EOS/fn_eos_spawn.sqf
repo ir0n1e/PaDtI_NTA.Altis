@@ -179,7 +179,7 @@ _this spawn {
 				_allunits = _allunits + (units _bGroup);
 				0 = [_bGroup, "INFskill"] call NTA_fnc_eos_setSkill;
 
-				if (_counter == _bGrps) then {
+				if (_counter == 1) then {
 
 					0 = [leader _bGroup, _mkr, "SHOWMARKER", "AMBUSH", "SPAWNED", "LIMITED"] execVM "scripts\UPSMON.sqf";
 				} else {
